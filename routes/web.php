@@ -25,6 +25,10 @@ Route::get('/ouvidoria', function () {
     return view('ouvidoria');
 });
 
+Route::get('/ouvidoria/consulta', function () {
+    return view('login');
+});
+
 
 
 

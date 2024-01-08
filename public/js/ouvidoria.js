@@ -14,20 +14,6 @@ function closeModal() {
     //$("#modal").hide();
 }
 
-// $(function () {
-//     $('[name="tipoCadastro"]').change(function () {
-//         let tipo = $('[name="tipoCadastro"]:checked').val();
-
-//         if (tipo == "pessoaFisica") {
-//             $(".pf").show();
-//             $(".pj").hide();
-//         } else {
-//             $(".pf").hide();
-//             $(".pj").show();
-//         }
-//     });
-// });
-
 $(function () {
     $('[name="tipoCadastro"]').change(function () {
         let tipo = $('[name="tipoCadastro"]:checked').val();
@@ -40,4 +26,20 @@ $(function () {
             $(".pj").show();
         }
     });
+
+    $('[name="tipoCadastro"]').change();
 });
+
+function login() {
+    const email = $("#email").val();
+    const senha = $("#password").val();
+    if (email == " " || senha == " ") {
+        alert("Preencha um email ou senha válido!");
+    } else {
+        $(".home").each((index, el) => $(el).hide());
+        $("#modal").each((index, el) => $(el).hide());
+
+        // SE LOGIN E SENHA FOR OK
+        location.replace("/ouvidoria/consulta");
+    }
+}

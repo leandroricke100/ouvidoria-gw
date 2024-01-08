@@ -23,7 +23,8 @@
 
 <body>
 
-    {{-- <div class="home">
+
+    <div class="home">
         <span><strong>&#8226; Denúncia:</strong></span>
         <p>Comunicação de prática de irregularidade ou ato ilícito cuja solução dependa da atuação dos órgãos
             apuratórios
@@ -62,30 +63,45 @@
                     <i class="fas fa-envelope"></i>
                     <input type="email" id="email" placeholder="teste@teste.com" required />
                 </div>
-                <button onclick="openModal()">PRÓXIMO</button>
+                <button onclick="openModal()">CADASTRAR <i class="fas fa-arrow-right"
+                        style="margin-left: 7px"></i></button>
             </div>
         </div>
 
         <div id="email-formulario">
-            <div class="title-email">Dados estatísticos</div>
+            <div class="title-email"><i class="fas fa-sign-in" style="margin-right: 10px"></i>Login</div>
             <div class="container-itens">
+                <label for="email">E-mail</label>
+                <div class="container-icons">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="teste@teste.com" required />
+                </div>
 
-                <p>Veja dados estatísticos das solicitações realizadas</p>
-                <button><i class="fas fa-chart-bar"></i> Ver dados estatísticos</button>
+                <label for="senha">Senha</label>
+                <div class="container-icons">
+                    <i class="fas fa-lock-alt"></i>
+                    <input type="password" id="password" placeholder="*******" required />
+                </div>
+                <button onclick="login()">ACESSAR <i class="fas fa-arrow-right" style="margin-left: 7px"></i></button>
             </div>
         </div>
-    </div> --}}
+    </div>
 
 
 
 
     <div id="modal" class="modal">
-        <div class="titulo-top">
-
-            <h1>Nova Solicitação</h1>
+        <div class="top">
+            <div class="voltar-top">
+                <button class="button-voltar" onclick="closeModal()">Voltar</button>
+            </div>
+            <div class="title-center">
+                <h1>Nova Solicitação</h1>
+            </div>
         </div>
+
         <section>
-            <button class="button-voltar" onclick="closeModal()">Voltar</button>
+
             <p>Preencha os campos abaixo para realizar seu cadastro.<br>
                 Eles são importantes para que você possa realizar e acompanhar solicitações junto à Ouvidoria da câmara.
             </p>
@@ -107,6 +123,14 @@
                     for="pessoaJuridica">Pessoa
                     Jurídica</label>
 
+                <div class="sigilo">
+                    <input type="radio" id="semSigilo" name="solicitacao" value="semSigilo" checked required><label
+                        for="semSigilo" style="margin-bottom: -4px; font-size:17px">Sem sigilo</label>
+
+                    <input style="margin-left: 15px" type="radio" id="sigilo" name="solicitacao" value="sigilo"
+                        required><label for="sigilo" style="margin-bottom: -4px; font-size:17px">Sigiloso</label>
+                </div>
+
 
 
                 <div class="cadastro">
@@ -117,7 +141,7 @@
                             <label for="nomeCompleto">Nome completo <span class="campo-obrigatorio"><span
                                         class="campo-obrigatorio">*</span></span></label>
                             <input type="text" id="nomeCompleto" name="nomeCompleto"
-                                placeholder="Digite seu nome completo..." required>
+                                placeholder="Digite seu nome completo">
                         </div>
                     </div>
 
@@ -125,7 +149,7 @@
                         <div class="field">
                             <label for="razaoSocial">Razão Social <span class="campo-obrigatorio">*</span></label>
                             <input type="text" id="razaoSocial" name="razaoSocial"
-                                placeholder="Digite a razão social da sua empresa..." required>
+                                placeholder="Digite a razão social da sua empresa" required>
                         </div>
                     </div>
 
@@ -134,7 +158,7 @@
                     <div class="pf">
                         <div class="field">
                             <label for="cpf">CPF <span class="campo-obrigatorio">*</span></label>
-                            <input type="number" id="cpf" name="cpf" placeholder="Digite seu CPF..."
+                            <input type="number" id="cpf" name="cpf" placeholder="Digite seu CPF"
                                 required>
                         </div>
                     </div>
@@ -142,7 +166,7 @@
                     <div class="pj">
                         <div class="field">
                             <label for="cnpj">CNPJ <span class="campo-obrigatorio">*</span></label>
-                            <input type="number" id="cnpj" name="cnpj" placeholder="Digite seu CNPJ..."
+                            <input type="number" id="cnpj" name="cnpj" placeholder="Digite seu CNPJ"
                                 required>
                         </div>
                     </div>
@@ -151,19 +175,19 @@
 
                     <div class="field">
                         <label for="email">E-mail <span class="campo-obrigatorio">*</span></label>
-                        <input type="text" id="email" name="email" placeholder="Digite seu e-email..."
+                        <input type="text" id="email" name="email" placeholder="Digite seu e-email"
                             required>
                     </div>
 
                     <div class="field">
                         <label for="telefone">Telefone <span class="campo-obrigatorio">*</span></label>
-                        <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone..."
+                        <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone"
                             required>
                     </div>
 
                     <div class="field">
                         <label for="celular">Celular <span class="campo-obrigatorio">*</span></label>
-                        <input type="tel" id="celular" name="celular" placeholder="Digite seu telefone..."
+                        <input type="tel" id="celular" name="celular" placeholder="Digite seu telefone"
                             required>
                     </div>
 
@@ -174,29 +198,30 @@
                             <label for="nomeResponsavel">Nome do responsável <span
                                     class="campo-obrigatorio">*</span></label>
                             <input type="text" id="nomeResponsavel" name="nomeResponsavel"
-                                placeholder="Digite o nome do responsáavel...">
+                                placeholder="Digite o nome do responsáavel">
                         </div>
                     </div>
 
 
 
                     <div class="field">
-                        <label for="dataNascimento">Data de Nascimento <span class="campo-obrigatorio">*</span></label>
+                        <label for="dataNascimento">Data de Nascimento <span
+                                class="campo-obrigatorio">*</span></label>
                         <input type="date" id="dataNascimento" name="dataNascimento"
-                            placeholder="Digite a data de nascimento...">
+                            placeholder="Digite a data de nascimento">
                     </div>
 
                     <div class="field">
                         <label for="nacionalidade">Nacionalidade <span class="campo-obrigatorio">*</span></label>
                         <input type="text" id="nacionalidade" name="nacionalidade"
-                            placeholder="Digite sua nacionalidade..." required>
+                            placeholder="Digite sua nacionalidade" required>
                     </div>
 
 
                     <div class="field">
                         <label for="estadoCivil">Estado Civil <span class="campo-obrigatorio">*</span></label>
                         <select id="estadoCivil" name="estadoCivil" required>
-                            <option value="" disabled selected>Selecione seu estado civil...</option>
+                            <option value="" disabled selected>Selecione seu estado civil</option>
                             <option value="solteiro">Solteiro(a)</option>
                             <option value="casado">Casado</option>
                             <option value="separado">Separado(a)</option>
@@ -208,7 +233,7 @@
                     <div class="field">
                         <label for="sexo">Sexo <span class="campo-obrigatorio">*</span></label>
                         <select id="sexo" name="sexo" required>
-                            <option value="" disabled selected>Selecione seu sexo...</option>
+                            <option value="" disabled selected>Selecione seu sexo</option>
                             <option value="solteiro">Masculino</option>
                             <option value="casado">Feminino</option>
                         </select>
@@ -218,10 +243,10 @@
                 <h3 class="endereco">Endereço</h3>
 
                 <div class="cadastro">
-                    <div class="field">
+                    <div class="field" style="flex-basis: 200px;">
                         <label for="endereco">Endereço completo (com número)<span
                                 class="campo-obrigatorio">*</span></label>
-                        <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço..."
+                        <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço"
                             required>
                     </div>
 
@@ -251,20 +276,22 @@
                 <h3>Acesso à Ouvidoria
                 </h3>
                 <div class="cadastro">
-                    <div class="field">
+                    <div class="field senha">
                         <div class="field">
                             <label for="senha">Senha <span class="campo-obrigatorio">*</span></label>
-                            <input type="password" id="senha" name="senha" placeholder="Digite sua senha..."
+                            <input type="password" id="senha" name="senha" placeholder="Digite sua senha"
                                 required>
+                        </div>
+
+                        <div class="field">
+                            <label for="confirmarSenha">Confirmar Senha <span
+                                    class="campo-obrigatorio">*</span></label>
+                            <input type="password" id="confirmarSenha" name="confirmarSenha"
+                                placeholder="Digite sua senha" required>
                         </div>
                     </div>
 
 
-                    <input type="radio" id="semSigilo" name="solicitacao" value="semSigilo" checked
-                        required><label for="semSigilo">Sem sigilo</label>
-
-                    <input type="radio" id="sigilo" name="solicitacao" value="sigilo" required><label
-                        for="sigilo">Sigilo</label>
 
                     <div class="field">
                         <label for="tipo">Tipo</label>
@@ -288,21 +315,32 @@
                         </select>
                     </div>
 
+
+                </div>
+                <div class="cadastro">
                     <div class="field">
                         <label for="assunto">Assunto</label>
                         <input type="text" id="assunto" name="assunto">
                     </div>
-
-                    <div class="field">
-                        <label for="mensagem">Mensagem</label>
-                        <textarea id="mensagem" name="mensagem" rows="4" cols="50">
+                </div>
+                <div class="cadastro">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" name="mensagem" rows="8" cols="50" class="text-area">
                         </textarea>
+
+                </div>
+
+                <div class="">
+                    <div class="cad">
+                        <div class="arquivo">
+                            <label for="arquivo">Arquivo</label>
+                            <input type="file" id="arquivo" name="arquivo">
+                        </div>
+
+                        <div>
+                            <button class="button-voltar" type="submit">Cadastrar</button>
+                        </div>
                     </div>
-
-                    <label for="arquivo">Arquivo</label>
-                    <input type="file" id="arquivo" name="arquivo">
-
-                    <button class="button-voltar" type="submit">Cadastrar</button>
                 </div>
             </form>
         </section>
