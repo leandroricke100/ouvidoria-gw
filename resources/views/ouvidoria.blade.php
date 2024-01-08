@@ -10,8 +10,9 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
 
 
-    <script src="{{ asset('js/ouvidoria.js') }}"></script>
-    <link href="{{ asset('css/ouvidoria.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/ouvidoria.js') }}?v={{ time() }}"></script>
+    <link href="{{ asset('css/ouvidoria.css') }}?v={{ time() }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
 
 
     {{-- <link
@@ -22,7 +23,7 @@
 
 <body>
 
-    <div class="home">
+    {{-- <div class="home">
         <span><strong>&#8226; Denúncia:</strong></span>
         <p>Comunicação de prática de irregularidade ou ato ilícito cuja solução dependa da atuação dos órgãos
             apuratórios
@@ -57,7 +58,10 @@
 
             <div class="container-itens">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="teste@teste.com" required />
+                <div class="container-icons">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="teste@teste.com" required />
+                </div>
                 <button onclick="openModal()">PRÓXIMO</button>
             </div>
         </div>
@@ -65,165 +69,243 @@
         <div id="email-formulario">
             <div class="title-email">Dados estatísticos</div>
             <div class="container-itens">
+
                 <p>Veja dados estatísticos das solicitações realizadas</p>
-                <button>Ver dados estatísticos</button>
+                <button><i class="fas fa-chart-bar"></i> Ver dados estatísticos</button>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 
 
     <div id="modal" class="modal">
-        <button onclick="closeModal()">Voltar</button>
-        <h1>Novo usuário</h1>
-        <p>Preencha os campos abaixo para realizar seu cadastro.
-        </p>
-        <p>Eles são importantes para que você possa realizar e acompanhar solicitações junto à Ouvidoria da câmara.
+        <div class="titulo-top">
 
-        <p>(*) Campos de preenchimento obrigatório.</p>
-
-        </p>
-        <form>
-            <h3>Tipo de Cadastro (*)</h3>
+            <h1>Nova Solicitação</h1>
+        </div>
+        <section>
+            <button class="button-voltar" onclick="closeModal()">Voltar</button>
+            <p>Preencha os campos abaixo para realizar seu cadastro.<br>
+                Eles são importantes para que você possa realizar e acompanhar solicitações junto à Ouvidoria da câmara.
+            </p>
 
 
-            <input type="radio" id="pessoaFisica" name="tipoCadastro" value="pessoaFisica" checked required><label
-                for="pessoaFisica">Pessoa
-                Física</label>
-            <input type="radio" id="pessoaJuridica" name="tipoCadastro" value="pessoaJuridica" required><label
-                for="pessoaJuridica">Pessoa
-                Jurídica</label>
+            <p class="campo-obrigatorio"><span class="campo-obrigatorio">*</span> Campos de preenchimento obrigatório.
+            </p>
 
-            <h3>Dados do Usuário
-            </h3>
+            </p>
+            <form class="form">
+                <h3>Tipo de Cadastro <span class="campo-obrigatorio"><span class="campo-obrigatorio">*</span></span>
+                </h3>
 
 
-            <div class="pf">
-                <label for="nomeCompleto">Nome completo (*)</label>
-                <input type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Digite seu nome completo..."
-                    required>
-            </div>
-
-            <div class="pj">
-                <label for="razaoSocial">Razão Social (*)</label>
-                <input type="text" id="razaoSocial" name="razaoSocial"
-                    placeholder="Digite a razão social da sua empresa..." required>
-            </div>
+                <input type="radio" id="pessoaFisica" name="tipoCadastro" value="pessoaFisica" checked required><label
+                    for="pessoaFisica">Pessoa
+                    Física</label>
+                <input type="radio" id="pessoaJuridica" name="tipoCadastro" value="pessoaJuridica" required><label
+                    for="pessoaJuridica">Pessoa
+                    Jurídica</label>
 
 
 
-            <div class="pf">
-                <label for="cpf">CPF (*)</label>
-                <input type="number" id="cpf" name="cpf" placeholder="Digite seu CPF..." required>
-            </div>
-
-            <div class="pj">
-                <label for="cnpj">CNPJ (*)</label>
-                <input type="number" id="cnpj" name="cnpj" placeholder="Digite seu CNPJ..." required>
-            </div>
+                <div class="cadastro">
 
 
+                    <div class="pf">
+                        <div class="field">
+                            <label for="nomeCompleto">Nome completo <span class="campo-obrigatorio"><span
+                                        class="campo-obrigatorio">*</span></span></label>
+                            <input type="text" id="nomeCompleto" name="nomeCompleto"
+                                placeholder="Digite seu nome completo..." required>
+                        </div>
+                    </div>
 
-
-            <label for="email">E-mail (*)</label>
-            <input type="text" id="email" name="email" placeholder="Digite seu e-email..." required>
-
-            <label for="telefone">Telefone (*)</label>
-            <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone..." required>
-
-            <label for="celular">Celular (*)</label>
-            <input type="tel" id="celular" name="celular" placeholder="Digite seu telefone..." required>
-
-            <h3>Dados Pessoais
-            </h3>
+                    <div class="pj">
+                        <div class="field">
+                            <label for="razaoSocial">Razão Social <span class="campo-obrigatorio">*</span></label>
+                            <input type="text" id="razaoSocial" name="razaoSocial"
+                                placeholder="Digite a razão social da sua empresa..." required>
+                        </div>
+                    </div>
 
 
 
-            <div class="pj">
-                <label for="nomeResponsavel">Nome do responsável (*)</label>
-                <input type="text" id="nomeResponsavel" name="nomeResponsavel"
-                    placeholder="Digite o nome do responsáavel...">
-            </div>
+                    <div class="pf">
+                        <div class="field">
+                            <label for="cpf">CPF <span class="campo-obrigatorio">*</span></label>
+                            <input type="number" id="cpf" name="cpf" placeholder="Digite seu CPF..."
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="pj">
+                        <div class="field">
+                            <label for="cnpj">CNPJ <span class="campo-obrigatorio">*</span></label>
+                            <input type="number" id="cnpj" name="cnpj" placeholder="Digite seu CNPJ..."
+                                required>
+                        </div>
+                    </div>
 
 
 
+                    <div class="field">
+                        <label for="email">E-mail <span class="campo-obrigatorio">*</span></label>
+                        <input type="text" id="email" name="email" placeholder="Digite seu e-email..."
+                            required>
+                    </div>
 
-            <label for="dataNascimento">Data de Nascimento (*)</label>
-            <input type="date" id="dataNascimento" name="dataNascimento"
-                placeholder="Digite a data de nascimento...">
+                    <div class="field">
+                        <label for="telefone">Telefone <span class="campo-obrigatorio">*</span></label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone..."
+                            required>
+                    </div>
 
-            <label for="nacionalidade">Nacionalidade (*)</label>
-            <input type="text" id="nacionalidade" name="nacionalidade" placeholder="Digite sua nacionalidade..."
-                required>
+                    <div class="field">
+                        <label for="celular">Celular <span class="campo-obrigatorio">*</span></label>
+                        <input type="tel" id="celular" name="celular" placeholder="Digite seu telefone..."
+                            required>
+                    </div>
 
-            <label for="naturalidade">Naturalidade (*)</label>
-            <input type="text" id="naturalidade" name="naturalidade" placeholder="Digite sua nacionalidade..."
-                required>
 
-            <label for="estadoCivil">Estado Civil (*)</label>
-            <select id="estadoCivil" name="estadoCivil" required>
-                <option value="" disabled selected>Selecione seu estado civil...</option>
-                <option value="solteiro">Solteiro(a)</option>
-                <option value="casado">Casado</option>
-                <option value="separado">Separado(a)</option>
-                <option value="divorciado">Divorciado(a)</option>
-                <option value="viuvo">Viuvo(a)</option>
-            </select>
 
-            <label for="sexo">Sexo (*)</label>
-            <select id="sexo" name="sexo" required>
-                <option value="" disabled selected>Selecione seu sexo...</option>
-                <option value="solteiro">Masculino</option>
-                <option value="casado">Feminino</option>
-            </select>
+                    <div class="pj">
+                        <div class="field">
+                            <label for="nomeResponsavel">Nome do responsável <span
+                                    class="campo-obrigatorio">*</span></label>
+                            <input type="text" id="nomeResponsavel" name="nomeResponsavel"
+                                placeholder="Digite o nome do responsáavel...">
+                        </div>
+                    </div>
 
-            <h3>Endereço</h3>
-            <label for="endereco">Endereço completo(*)</label>
-            <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço..." required>
 
-            <h3>Acesso à Ouvidoria
-            </h3>
-            <label for="senha">Senha (*)</label>
-            <input type="password" id="senha" name="senha" placeholder="Digite sua senha..." required>
 
-            <h3>Solicitaçção</h3>
-            <input type="radio" id="semSigilo" name="solicitacao" value="semSigilo" checked required><label
-                for="semSigilo">Sem sigilo</label>
+                    <div class="field">
+                        <label for="dataNascimento">Data de Nascimento <span class="campo-obrigatorio">*</span></label>
+                        <input type="date" id="dataNascimento" name="dataNascimento"
+                            placeholder="Digite a data de nascimento...">
+                    </div>
 
-            <input type="radio" id="sigilo" name="solicitacao" value="sigilo" required><label
-                for="sigilo">Sigilo</label>
+                    <div class="field">
+                        <label for="nacionalidade">Nacionalidade <span class="campo-obrigatorio">*</span></label>
+                        <input type="text" id="nacionalidade" name="nacionalidade"
+                            placeholder="Digite sua nacionalidade..." required>
+                    </div>
 
-            <label for="tipo">Tipo</label>
-            <select id="tipo" name="tipo" required>
-                <option value="" disabled selected>Selecione</option>
-                <option value="denuncia">Denúncia</option>
-                <option value="elogio">Elogio</option>
-                <option value="reclamacao">Reclamação</option>
-                <option value="sugestao">Sugestão</option>
-                <option value="simplificada">Simplificada</option>
-            </select>
 
-            <label for="prioridade">Prioridade</label>
-            <select id="prioridade" name="prioridade" required>
-                <option value="baixa">Baixa</option>
-                <option value="media">Média</option>
-                <option value="alta">Alta</option>
-                <option value="urgente">Urgente</option>
-            </select>
+                    <div class="field">
+                        <label for="estadoCivil">Estado Civil <span class="campo-obrigatorio">*</span></label>
+                        <select id="estadoCivil" name="estadoCivil" required>
+                            <option value="" disabled selected>Selecione seu estado civil...</option>
+                            <option value="solteiro">Solteiro(a)</option>
+                            <option value="casado">Casado</option>
+                            <option value="separado">Separado(a)</option>
+                            <option value="divorciado">Divorciado(a)</option>
+                            <option value="viuvo">Viuvo(a)</option>
+                        </select>
+                    </div>
 
-            <label for="assunto">Assunto</label>
-            <input type="text" id="assunto" name="assunto">
+                    <div class="field">
+                        <label for="sexo">Sexo <span class="campo-obrigatorio">*</span></label>
+                        <select id="sexo" name="sexo" required>
+                            <option value="" disabled selected>Selecione seu sexo...</option>
+                            <option value="solteiro">Masculino</option>
+                            <option value="casado">Feminino</option>
+                        </select>
+                    </div><br>
+                </div>
 
-            <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" rows="4" cols="50">
-            </textarea>
+                <h3 class="endereco">Endereço</h3>
 
-            <label for="arquivo">Arquivo</label>
-            <input type="file" id="arquivo" name="arquivo">
+                <div class="cadastro">
+                    <div class="field">
+                        <label for="endereco">Endereço completo (com número)<span
+                                class="campo-obrigatorio">*</span></label>
+                        <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço..."
+                            required>
+                    </div>
 
-            <button type="submit">Cadastrar</button>
-        </form>
+                    <div class="field">
+                        <label for="endereco">CEP <span class="campo-obrigatorio">*</span></label>
+                        <input type="number" id="cep" name="cep" placeholder="CEP" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="endereco">Complemento </label>
+                        <input type="text" id="complemento" name="complemento" placeholder="Complemento"
+                            required>
+                    </div>
+
+                    <div class="field">
+                        <label for="endereco">Bairro completo <span class="campo-obrigatorio">*</span></label>
+                        <input type="bairro" id="bairro" name="endereco" placeholder="Bairro" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="endereco">Cidade <span class="campo-obrigatorio">*</span></label>
+                        <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
+                    </div>
+
+                </div>
+
+                <h3>Acesso à Ouvidoria
+                </h3>
+                <div class="cadastro">
+                    <div class="field">
+                        <div class="field">
+                            <label for="senha">Senha <span class="campo-obrigatorio">*</span></label>
+                            <input type="password" id="senha" name="senha" placeholder="Digite sua senha..."
+                                required>
+                        </div>
+                    </div>
+
+
+                    <input type="radio" id="semSigilo" name="solicitacao" value="semSigilo" checked
+                        required><label for="semSigilo">Sem sigilo</label>
+
+                    <input type="radio" id="sigilo" name="solicitacao" value="sigilo" required><label
+                        for="sigilo">Sigilo</label>
+
+                    <div class="field">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" name="tipo" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="denuncia">Denúncia</option>
+                            <option value="elogio">Elogio</option>
+                            <option value="reclamacao">Reclamação</option>
+                            <option value="sugestao">Sugestão</option>
+                            <option value="simplificada">Simplificada</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="prioridade">Prioridade</label>
+                        <select id="prioridade" name="prioridade" required>
+                            <option value="baixa">Baixa</option>
+                            <option value="media">Média</option>
+                            <option value="alta">Alta</option>
+                            <option value="urgente">Urgente</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="assunto">Assunto</label>
+                        <input type="text" id="assunto" name="assunto">
+                    </div>
+
+                    <div class="field">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="4" cols="50">
+                        </textarea>
+                    </div>
+
+                    <label for="arquivo">Arquivo</label>
+                    <input type="file" id="arquivo" name="arquivo">
+
+                    <button class="button-voltar" type="submit">Cadastrar</button>
+                </div>
+            </form>
+        </section>
     </div>
 </body>
 
