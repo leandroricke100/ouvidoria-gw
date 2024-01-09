@@ -17,7 +17,9 @@
 
 <body>
     <div id="atendimento" class="atendimento">
-
+        <div class="voltar-top">
+            <button class="button-voltar" onclick="inicio()">Voltar</button>
+        </div>
         <div class="ticket">
             <div class="number-atendimento">
 
@@ -26,7 +28,8 @@
                 <p> - 103/2024</p>
             </div>
 
-            <span>Situação atual: Novo | Código nº 658.817.047.393.330.402
+            <span><strong>Situação atual:</strong> Novo
+                <br><strong>Código:</strong> nº 658.817.047.393.330.402
 
             </span>
 

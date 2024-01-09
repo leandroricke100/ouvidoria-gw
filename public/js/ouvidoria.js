@@ -1,5 +1,5 @@
 function openModal() {
-    const email = $("#email").val();
+    const email = $("#emailCadastro").val();
     if (email == "") {
         alert("Preencha um email");
     } else {
@@ -31,10 +31,10 @@ $(function () {
 });
 
 function login() {
-    const email = $("#email").val();
+    const email = $("#emailLogin").val();
     const senha = $("#password").val();
-    if (email == " " || senha == " ") {
-        alert("Preencha um email ou senha válido!");
+    if (email === "" || senha === "") {
+        alert("Preencha um email e senha válidos!");
     } else {
         $(".home").each((index, el) => $(el).hide());
         $("#modal").each((index, el) => $(el).hide());
@@ -42,4 +42,8 @@ function login() {
         // SE LOGIN E SENHA FOR OK
         location.replace("/ouvidoria/consulta");
     }
+}
+
+function inicio() {
+    location.replace("/ouvidoria");
 }

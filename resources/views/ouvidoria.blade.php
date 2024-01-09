@@ -61,7 +61,7 @@
                 <label for="email">E-mail</label>
                 <div class="container-icons">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" placeholder="teste@teste.com" required />
+                    <input type="email" id="emailCadastro" placeholder="teste@teste.com" required />
                 </div>
                 <button onclick="openModal()">CADASTRAR <i class="fas fa-arrow-right"
                         style="margin-left: 7px"></i></button>
@@ -74,7 +74,7 @@
                 <label for="email">E-mail</label>
                 <div class="container-icons">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" placeholder="teste@teste.com" required />
+                    <input type="email" id="emailLogin" placeholder="teste@teste.com" required />
                 </div>
 
                 <label for="senha">Senha</label>
@@ -134,42 +134,33 @@
 
 
                 <div class="cadastro">
-
-
-                    <div class="pf">
-                        <div class="field">
-                            <label for="nomeCompleto">Nome completo <span class="campo-obrigatorio"><span
-                                        class="campo-obrigatorio">*</span></span></label>
-                            <input type="text" id="nomeCompleto" name="nomeCompleto"
-                                placeholder="Digite seu nome completo">
-                        </div>
-                    </div>
-
-                    <div class="pj">
-                        <div class="field">
-                            <label for="razaoSocial">Razão Social <span class="campo-obrigatorio">*</span></label>
-                            <input type="text" id="razaoSocial" name="razaoSocial"
-                                placeholder="Digite a razão social da sua empresa" required>
-                        </div>
+                    <div class="field pf">
+                        <label for="nomeCompleto">Nome completo <span class="campo-obrigatorio"><span
+                                    class="campo-obrigatorio">*</span></span></label>
+                        <input type="text" id="nomeCompleto" name="nomeCompleto"
+                            placeholder="Digite seu nome completo">
                     </div>
 
 
 
-                    <div class="pf">
-                        <div class="field">
-                            <label for="cpf">CPF <span class="campo-obrigatorio">*</span></label>
-                            <input type="number" id="cpf" name="cpf" placeholder="Digite seu CPF"
-                                required>
-                        </div>
+                    <div class="field pj">
+                        <label for="razaoSocial">Razão Social <span class="campo-obrigatorio">*</span></label>
+                        <input type="text" id="razaoSocial" name="razaoSocial"
+                            placeholder="Digite a razão social da sua empresa" required>
                     </div>
 
-                    <div class="pj">
-                        <div class="field">
-                            <label for="cnpj">CNPJ <span class="campo-obrigatorio">*</span></label>
-                            <input type="number" id="cnpj" name="cnpj" placeholder="Digite seu CNPJ"
-                                required>
-                        </div>
+
+                    <div class="field pf">
+                        <label for="cpf">CPF <span class="campo-obrigatorio">*</span></label>
+                        <input type="number" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
                     </div>
+
+
+                    <div class="field pj">
+                        <label for="cnpj">CNPJ <span class="campo-obrigatorio">*</span></label>
+                        <input type="number" id="cnpj" name="cnpj" placeholder="Digite seu CNPJ" required>
+                    </div>
+
 
 
 
@@ -237,7 +228,7 @@
                             <option value="solteiro">Masculino</option>
                             <option value="casado">Feminino</option>
                         </select>
-                    </div><br>
+                    </div>
                 </div>
 
                 <h3 class="endereco">Endereço</h3>
@@ -337,7 +328,7 @@
                             <input type="file" id="arquivo" name="arquivo">
                         </div>
 
-                        <div>
+                        <div class="button-cad">
                             <button class="button-voltar" type="submit">Cadastrar</button>
                         </div>
                     </div>

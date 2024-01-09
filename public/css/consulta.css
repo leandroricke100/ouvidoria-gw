@@ -97,11 +97,8 @@ p {
 .new-text {
     border: 1px solid #ddd;
     padding: 15px;
-    /* margin-bottom: 30px; */
     border-radius: 5px;
     display: flex;
-    /* align-items: center; */
-    /* justify-content: center; */
     flex-direction: column;
     margin-top: 30px;
 
@@ -125,5 +122,22 @@ p {
 
     input {
         margin-bottom: 30px;
+    }
+}
+
+button.button-voltar {
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 17px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background-color: #2c7bff;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
     }
 }
