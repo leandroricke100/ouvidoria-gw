@@ -115,20 +115,25 @@
                 <h3>Tipo de Cadastro <span class="campo-obrigatorio"><span class="campo-obrigatorio">*</span></span>
                 </h3>
 
+                <div class="radio">
+                    <input type="radio" id="pessoaFisica" name="tipoCadastro" value="pessoaFisica" checked required>
+                    <label for="pessoaFisica">Pessoa Física</label>
+                </div>
 
-                <input type="radio" id="pessoaFisica" name="tipoCadastro" value="pessoaFisica" checked required><label
-                    for="pessoaFisica">Pessoa
-                    Física</label>
-                <input type="radio" id="pessoaJuridica" name="tipoCadastro" value="pessoaJuridica" required><label
-                    for="pessoaJuridica">Pessoa
-                    Jurídica</label>
+                <div class="radio">
+                    <input type="radio" id="pessoaJuridica" name="tipoCadastro" value="pessoaJuridica" required>
+                    <label for="pessoaJuridica">Pessoa Jurídica<label>
+                </div>
 
                 <div class="sigilo">
-                    <input type="radio" id="semSigilo" name="solicitacao" value="semSigilo" checked required><label
-                        for="semSigilo" style="margin-bottom: -4px; font-size:17px">Sem sigilo</label>
+                    <input type="radio" id="semSigilo" name="solicitacao" value="semSigilo" checked required>
+                    <label for="semSigilo" style="margin-bottom: -4px;">
+                        Sem sigilo
+                    </label>
 
                     <input style="margin-left: 15px" type="radio" id="sigilo" name="solicitacao" value="sigilo"
-                        required><label for="sigilo" style="margin-bottom: -4px; font-size:17px">Sigiloso</label>
+                        required>
+                    <label for="sigilo" style="margin-bottom: -4px;">Sigiloso</label>
                 </div>
 
 
@@ -141,28 +146,21 @@
                             placeholder="Digite seu nome completo">
                     </div>
 
-
-
                     <div class="field pj">
                         <label for="razaoSocial">Razão Social <span class="campo-obrigatorio">*</span></label>
                         <input type="text" id="razaoSocial" name="razaoSocial"
                             placeholder="Digite a razão social da sua empresa" required>
                     </div>
 
-
                     <div class="field pf">
                         <label for="cpf">CPF <span class="campo-obrigatorio">*</span></label>
                         <input type="number" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
                     </div>
 
-
                     <div class="field pj">
                         <label for="cnpj">CNPJ <span class="campo-obrigatorio">*</span></label>
                         <input type="number" id="cnpj" name="cnpj" placeholder="Digite seu CNPJ" required>
                     </div>
-
-
-
 
                     <div class="field">
                         <label for="email">E-mail <span class="campo-obrigatorio">*</span></label>
@@ -181,7 +179,6 @@
                         <input type="tel" id="celular" name="celular" placeholder="Digite seu telefone"
                             required>
                     </div>
-
 
 
                     <div class="pj">
@@ -311,12 +308,14 @@
                 <div class="cadastro">
                     <div class="field">
                         <label for="assunto">Assunto</label>
-                        <input type="text" id="assunto" name="assunto">
+                        <input type="text" id="assunto" name="assunto"
+                            placeholder="Digite aqui o assunto de sua solicitação">
                     </div>
                 </div>
                 <div class="cadastro">
                     <label for="mensagem">Mensagem</label>
-                    <textarea id="mensagem" name="mensagem" rows="8" cols="50" class="text-area">
+                    <textarea id="mensagem" name="mensagem" rows="8" cols="50" class="text-area"
+                        placeholder="Digite aqui sua mensagem">
                         </textarea>
 
                 </div>

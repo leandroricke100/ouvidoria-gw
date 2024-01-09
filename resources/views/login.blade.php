@@ -17,21 +17,29 @@
 
 <body>
     <div id="atendimento" class="atendimento">
-        <div class="voltar-top">
-            <button class="button-voltar" onclick="inicio()">Voltar</button>
+        <div class="logout-top">
+            <div class="voltar-top">
+                <button class="button-voltar" onclick="inicio()">Voltar</button>
+            </div>
+
+            <div class="logado">
+                <span><strong>Logado:</strong> 395.****-19</span>
+                <button class="button-sair" onclick="inicio()">Sair</button>
+            </div>
         </div>
         <div class="ticket">
             <div class="number-atendimento">
-
                 <i class="far fa-bullhorn"></i>
                 <h2>Atendimento</h2>
                 <p> - 103/2024</p>
             </div>
+            <div class="info-atendimento">
+                <span><strong>Situação atual:</strong> Novo</span>
+                <span><strong>Código:</strong> nº 658.817.047.393.330.402</span>
+            </div>
 
-            <span><strong>Situação atual:</strong> Novo
-                <br><strong>Código:</strong> nº 658.817.047.393.330.402
 
-            </span>
+
 
         </div>
 

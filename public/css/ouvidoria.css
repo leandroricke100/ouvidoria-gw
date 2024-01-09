@@ -29,6 +29,7 @@ body {
 .modal {
     display: none;
 }
+
 .home {
     display: block;
     margin: 30px 30px;
@@ -66,12 +67,14 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0 10px;
+
     label {
         font-weight: bold;
         font-size: 15px;
         margin-top: 15px;
         margin-bottom: 7px;
     }
+
     input {
         outline: none;
         text-decoration: none;
@@ -80,8 +83,8 @@ body {
         border: 1px solid #ccc;
         width: 100%;
         border-radius: 5px;
-        /* line-height: 1; */
     }
+
     button {
         padding: 10px 15px;
         border: none;
@@ -91,37 +94,10 @@ body {
         background-color: #2c7bff;
         cursor: pointer;
     }
+
     button:hover {
         opacity: 0.5;
     }
-}
-
-.fa-chart-bar:before {
-    content: "\f080";
-    margin-right: 4px;
-    font-size: 14px;
-}
-
-.fa-envelope:before {
-    content: "\f0e0";
-    padding: 11px 13px;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1;
-    background-color: #eee;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.fa-lock-alt::before {
-    content: "\f0e0";
-    padding: 11px 13px;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1;
-    background-color: #eee;
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }
 
 /* pagina de dados */
@@ -141,6 +117,7 @@ div#modal {
     background-color: #f5f5f5;
     border-color: #ddd;
     padding: 10px 15px;
+
     /* button {
         padding: 6px;
         height: 28px;
@@ -148,6 +125,7 @@ div#modal {
     h1 {
         font-size: 16px;
     }
+
     justify-content: center;
     border: 1;
 }
@@ -182,6 +160,7 @@ section {
 .campo-obrigatorio {
     color: #a94442;
 }
+
 .form {
     h3 {
         font-size: 17px;
@@ -213,6 +192,7 @@ input {
     align-items: flex-end;
     margin-top: 25px;
 }
+
 select#estadoCivil {
     padding: 6px;
     border: 1px solid #c9c9c9;
@@ -237,6 +217,7 @@ select#tipo {
     font-size: 14px;
     outline: none;
 }
+
 select#prioridade {
     padding: 6px;
     border: 1px solid #c9c9c9;
@@ -254,8 +235,9 @@ select#prioridade {
     flex-direction: row;
     gap: 15px;
 }
+
 .sigilo {
-    height: 90px;
+    height: 37px;
     background-color: #2c7bff;
     display: flex;
     align-items: center;
@@ -270,7 +252,7 @@ select#prioridade {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 7px;
+    /* gap: 7px; */
     margin-bottom: 10px;
 }
 
@@ -280,6 +262,43 @@ select#prioridade {
     align-items: center;
     margin-top: 30px;
     margin-bottom: 20px;
+}
+
+.radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+
+    label {
+        margin: 0;
+    }
+
+    input {
+        margin: 0;
+    }
+}
+
+
+.container-itens .container-icons i {
+    background: #e3e3e3;
+    height: 37px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px 0 0 5px;
+    color: #7b7b7b;
+    border: 1px solid #c6c6c6;
+    border-right: 0;
+}
+
+.container-itens .container-icons input {
+    border-radius: 0 5px 5px 0;
+}
+
+input:focus {
+    border-color: #2c7bff;
 }
 
 @media screen and (max-width: 768px) {
@@ -315,6 +334,7 @@ select#prioridade {
     .button-voltar {
         width: 100%;
     }
+
     .sigilo {
         height: 65px;
     }
