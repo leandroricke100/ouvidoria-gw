@@ -11,7 +11,12 @@
 </head>
 
 <body>
-    <h2>Atendimento {{ $aaaa->ticket_number }}</h2>
+
+    @if ($at)
+        <h2>Atendimento {{ $at->ticket_number }}</h2>
+    @else
+        <p>Não encontrado!</p>
+    @endif
 
 </body>
 

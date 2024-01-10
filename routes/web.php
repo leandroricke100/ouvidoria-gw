@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'home']);
 
+
+Route::get('/atendimento/{id}', [IndexController::class, 'atendimento']);
+
+
 Route::get('/materia/{id}', function ($id) {
     return view('materia', ['id' => $id]);
 });

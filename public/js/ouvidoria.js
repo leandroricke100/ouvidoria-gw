@@ -47,3 +47,48 @@ function login() {
 function inicio() {
     location.replace("/ouvidoria");
 }
+
+
+function efetuarCadastro() {
+    let dadosForm = new FormData($('#cad-atendimento')[0]);
+
+    $.ajax({
+        url: '/api/Ouvidoria',
+        type: "POST",
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        cache: false,
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data: dadosForm,
+        success: function (resposta) {
+            console.log(resposta);
+
+            if (resposta.status == false) {
+                //$('.msg').text(resposta.msg);
+                //$('.msg').show();
+
+                console.log('deu errado')
+            } else {
+                // exibe msg
+                console.log('tudo ok')
+                //location.replace('/atendimento/' + resposta.id);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest, textStatus, errorThrown);
+            alert('Deu erro');
+        }
+    });
+
+}
+
+
+
+
+
+
+
+
+
+$(() => $('form').submit((e) => e.preventDefault()));

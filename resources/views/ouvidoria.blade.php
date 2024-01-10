@@ -14,6 +14,8 @@
     <link href="{{ asset('css/ouvidoria.css') }}?v={{ time() }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 
     {{-- <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -102,6 +104,8 @@
 
         <section>
 
+            {{-- <p style="display: none;" class="msg"></p> --}}
+
             <p>Preencha os campos abaixo para realizar seu cadastro.<br>
                 Eles são importantes para que você possa realizar e acompanhar solicitações junto à Ouvidoria da câmara.
             </p>
@@ -111,7 +115,7 @@
             </p>
 
             </p>
-            <form class="form">
+            <form class="form" id="cad-atendimento">
                 <h3>Tipo de Cadastro <span class="campo-obrigatorio"><span class="campo-obrigatorio">*</span></span>
                 </h3>
 
@@ -176,7 +180,7 @@
 
                     <div class="field">
                         <label for="celular">Celular <span class="campo-obrigatorio">*</span></label>
-                        <input type="tel" id="celular" name="celular" placeholder="Digite seu telefone"
+                        <input type="tel" id="celular" name="celular" placeholder="Digite seu celular"
                             required>
                     </div>
 
@@ -328,7 +332,8 @@
                         </div>
 
                         <div class="button-cad">
-                            <button class="button-voltar" type="submit">Cadastrar</button>
+                            <button class="button-voltar" type="button"
+                                onclick="efetuarCadastro();">Cadastrar</button>
                         </div>
                     </div>
                 </div>
