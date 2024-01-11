@@ -63,6 +63,7 @@ function efetuarCadastro() {
         data: dadosForm,
         success: function (resposta) {
             console.log(resposta);
+            console.log('tudo ok')
 
             if (resposta.status == false) {
                 //$('.msg').text(resposta.msg);

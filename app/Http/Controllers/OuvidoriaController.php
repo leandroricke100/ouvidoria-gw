@@ -31,6 +31,8 @@ class OuvidoriaController extends Controller
         //     $user->sigilo = $dadosForm['solicitacao'];
         // }
 
+
+
         if ($dadosForm['tipoCadastro'] === 'pessoaFisica') {
             $user->tipo_pessoa = 'pessoaFisica';
             $user->nome_completo = $dadosForm['nomeCompleto'];
@@ -46,14 +48,26 @@ class OuvidoriaController extends Controller
             $user->cpf = '(NULL)';
         }
 
-
-
-
+        $user->complemento = $dadosForm['complemento'];
+        $user->assunto = $dadosForm['assunto'];
         $user->telefone = $dadosForm['telefone'];
+        $user->cep = $dadosForm['cep'];
+
+        $user->confirmar_senha = $dadosForm['confirmarSenha'];
+        //$user->data_nascimento = $dadosForm['dataNascimento'];
         $user->celular = $dadosForm['celular'];
-        $user->tipo_pessoa = $dadosForm['tipoCadastro'];
+        $user->email = $dadosForm['email'];
+        $user->endereco = $dadosForm['endereco'];
+        $user->estado_civil = $dadosForm['estadoCivil'];
+        $user->mensagem = $dadosForm['mensagem'];
+        $user->nacionalidade = $dadosForm['nacionalidade'];
+        $user->prioridade = $dadosForm['prioridade'];
+        $user->senha = $dadosForm['senha'];
+        $user->sexo = $dadosForm['sexo'];
+        $user->tipo = $dadosForm['tipo'];
         $user->tipo_sigilo = $dadosForm['solicitacao'];
         $user->save();
+
         // CADASTRO
 
         // $atendimento = new OuvidoriaAtendimento;
@@ -67,12 +81,38 @@ class OuvidoriaController extends Controller
         // ];
         // return response()->json($retorno);
 
+        $usuario = OuvidoriaUsuario::find(29);
 
 
         // É OBRIGATÓRIO RETORNAR ALGUMA COISA
         $retorno = [
-            'data' => $dadosForm
+            'data' => $dadosForm,
+            'user' => $usuario,
         ];
-        return response()->json($retorno);
+        //return response()->json($retorno);
+
+        return view('homepage', $retorno);
+
+
+        //     $arrayTeste = [
+        //         'nome' => '123',
+        //         'aaaa' => $atendimento,
+        //         'respostas' => $password,
+        //         'lalala' => 'askdklasdkasdkj',
+        //         'abacate' => $usuarios,
+        //     ];
+
+        //     return view('homepage', $arrayTeste);
+        // }
+
+
+        // public function atendimento(Request $request, $id)
+        // {
+        //     $atendimento = OuvidoriaAtendimento::find($id);
+
+        //     return view('atendimento', [
+        //         'at' => $atendimento
+        //     ]);
+        // }
     }
 }

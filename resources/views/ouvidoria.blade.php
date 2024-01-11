@@ -243,23 +243,23 @@
                     </div>
 
                     <div class="field">
-                        <label for="endereco">CEP <span class="campo-obrigatorio">*</span></label>
+                        <label for="cep">CEP <span class="campo-obrigatorio">*</span></label>
                         <input type="number" id="cep" name="cep" placeholder="CEP" required>
                     </div>
 
                     <div class="field">
-                        <label for="endereco">Complemento </label>
+                        <label for="complemento">Complemento </label>
                         <input type="text" id="complemento" name="complemento" placeholder="Complemento"
                             required>
                     </div>
 
                     <div class="field">
-                        <label for="endereco">Bairro completo <span class="campo-obrigatorio">*</span></label>
+                        <label for="bairro">Bairro <span class="campo-obrigatorio">*</span></label>
                         <input type="bairro" id="bairro" name="endereco" placeholder="Bairro" required>
                     </div>
 
                     <div class="field">
-                        <label for="endereco">Cidade <span class="campo-obrigatorio">*</span></label>
+                        <label for="cidade">Cidade <span class="campo-obrigatorio">*</span></label>
                         <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
                     </div>
 

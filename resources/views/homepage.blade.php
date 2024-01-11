@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <h2>Atendimento {{ $aaaa->ticket_number }}</h2>
+    <h2>Atendimento {{ $nome }}</h2>
 
 </body>
 

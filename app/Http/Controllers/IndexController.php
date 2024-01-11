@@ -26,13 +26,13 @@ class IndexController extends Controller
         // }
 
 
-        $usuarios = OuvidoriaUsuario::where('pessoa_fisica', null)->get()->all();
+        //$usuarios = OuvidoriaUsuario::where('pessoa_fisica', null)->get()->all();
 
 
-        foreach ($usuarios as $usuario) {
-            $usuario->pessoa_fisica = 'nao';
-            $usuario->save();
-        }
+        // foreach ($usuarios as $usuario) {
+        //     $usuario->pessoa_fisica = 'nao';
+        //     $usuario->save();
+        // }
 
 
         // $usuario->delete();
@@ -45,9 +45,11 @@ class IndexController extends Controller
 
         // /ouvidoria/consulta/1
 
-        $atendimento = OuvidoriaAtendimento::find(8);
+        $atendimento = OuvidoriaUsuario::find(34);
 
-        $password = OuvidoriaUsuario::where('senha', 9)->get()->first();
+        $password = OuvidoriaUsuario::where('cpf', '39590044867')->get()->first();
+
+
 
 
 
@@ -77,19 +79,19 @@ class IndexController extends Controller
             'aaaa' => $atendimento,
             'respostas' => $password,
             'lalala' => 'askdklasdkasdkj',
-            'abacate' => $usuarios,
+            //'abacate' => $usuarios,
         ];
 
         return view('homepage', $arrayTeste);
     }
 
 
-    public function atendimento(Request $request, $id)
-    {
-        $atendimento = OuvidoriaAtendimento::find($id);
+    // public function atendimento(Request $request, $id)
+    // {
+    //     $atendimento = OuvidoriaAtendimento::find($id);
 
-        return view('atendimento', [
-            'at' => $atendimento
-        ]);
-    }
+    //     return view('atendimento', [
+    //         'at' => $atendimento
+    //     ]);
+    // }
 }
