@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <h2>Atendimento {{ $nome }}</h2>
+    <h2>Homepage</h2>
 
 </body>
 

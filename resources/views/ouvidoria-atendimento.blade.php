@@ -1,3 +1,5 @@
+@inject('Helper', '\App\Helper\Helper')
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,13 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ouvidoria - Consulta</title>
+    <title>Ouvidoria - Atendimento {{ $Helper->leftPad($atendimento->numero) }}/{{ $atendimento->ano }}
+    </title>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
 
-
-    <script src="{{ asset('js/ouvidoria.js') }}?v={{ time() }}"></script>
-    <link href="{{ asset('css/consulta.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/ouvidoria-atendimento.css') }}?v={{ time() }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
 </head>
 
@@ -23,7 +24,13 @@
             </div>
 
             <div class="logado">
-                <span><strong>Logado:</strong> 395.****-19</span>
+                @if ($user->cnpj === null)
+                    <span><strong>Logado:
+                        </strong>{{ substr($user->cpf, 0, 3) . '.*****-' . substr($user->cpf, -2) }}</span>
+                @else
+                    <span><strong>Logado:
+                        </strong>{{ substr($user->cnpj, 0, 3) . '.*****-' . substr($user->cnpj, -2) }}</span>
+                @endif
                 <button class="button-sair" onclick="inicio()">Sair</button>
             </div>
         </div>
@@ -31,11 +38,11 @@
             <div class="number-atendimento">
                 <i class="far fa-bullhorn"></i>
                 <h2>Atendimento</h2>
-                <p> - 103/2024</p>
+                <p> - {{ $Helper->leftPad($atendimento->numero) }}/{{ $atendimento->ano }}</p>
             </div>
             <div class="info-atendimento">
-                <span><strong>Situação atual:</strong> Novo</span>
-                <span><strong>Código:</strong> nº 658.817.047.393.330.402</span>
+                <span><strong>Situação atual: </strong>{{ $atendimento->situacao }}</span>
+                <span><strong>Código:</strong> nº {{ $atendimento->codigo }}</span>
             </div>
 
 
@@ -45,22 +52,21 @@
 
         <div class="container">
             <div class="painel">
-                <span>
-                    Sigiloso
-                </span>
 
-                <p>Finalidade: <strong>Elogio</strong></p>
+                <span>{{ $atendimento['sigiloso'] ? 'Sigiloso' : 'Sem sigilo' }}</span>
 
-                <p>Em 08/01/2024 às 15:42</p>
+                <p>Finalidade: <strong>{{ $atendimento->tipo }}</strong></p>
+
+                <p>Em: {{ $Helper->convertDate($atendimento->created_at) }}</p>
             </div>
             <div class="info">
                 <div class="title">
-                    <h1>Assistência social</h1>
+                    <h1>{{ $atendimento->assunto }}</h1>
                 </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi in enim vel, quo rerum exercitationem
-                    pariatur voluptate, perspiciatis voluptates maxime eos, consectetur quae fuga possimus nihil
-                    doloremque. Voluptatibus, aut mollitia.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id, iure. Perspiciatis incidunt dolores non
+                    quos corporis, in at fugit doloremque. Asperiores fuga odit natus quod vel labore doloremque
+                    nesciunt modi.</p>
 
             </div>
         </div>

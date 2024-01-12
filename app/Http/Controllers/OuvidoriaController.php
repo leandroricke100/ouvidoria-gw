@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\FileHelper;
 use App\Models\OuvidoriaAtendimento;
+use App\Models\OuvidoriaMensagem;
 use App\Models\OuvidoriaUsuario;
 use Illuminate\Http\Request;
 
@@ -10,101 +12,93 @@ class OuvidoriaController extends Controller
 {
     public function geral(Request $request)
     {
-        // DADOS DO FORMULÁRIO
-        $dadosForm = $request->all(); // <<<< ARRAY/OBJETO COM DADOS DO FORMULÁRIO
+        $dadosForm = $request->all();
+        // UPLOAD DO ARQUIVO
+        $nome_arquivo = null;
+        if ($request->file('arquivo')) {
+            $FileHelper = new FileHelper;
+            $infoAnexoImg = $FileHelper->upload([
+                'file' => $request->file('arquivo'),
+                'pasta' => 'ouvidoria/arquivos',
+                'nome' => 'Arquivo Ouvidoria',
+                'observacao' => '',
+                'temporario' => false,
+                'restrito' => true,
+            ]);
+            $nome_arquivo = $infoAnexoImg['status'] ? $infoAnexoImg['nome_arquivo'] : null;
 
-        // isso. Ta certo.
+            if (!$infoAnexoImg['status']) return ['status' => false, 'msg' => 'Falha no upload do arquivo.', 'retorno' => $infoAnexoImg];
+        }
 
-        // VALIDAÇÃO
-
-        // $retorno = [
-        //     'status' => false,
-        //     'msg' => 'Preencha o nome!'
-        // ];
-        // return response()->json($retorno);
-
+        // CADASTRO DO USUÁRIO
         $user = new OuvidoriaUsuario;
-
-        // if ($dadosForm['solicitacao'] === 'semSigilo') {
-        //     $user->sem_sigilo = 'semSigilo';
-        // } else {
-        //     $user->sigilo = $dadosForm['solicitacao'];
-        // }
-
-
-
         if ($dadosForm['tipoCadastro'] === 'pessoaFisica') {
             $user->tipo_pessoa = 'pessoaFisica';
             $user->nome_completo = $dadosForm['nomeCompleto'];
             $user->cpf = $dadosForm['cpf'];
-            $user->razao_social = '(NULL)';
-            $user->cnpj = '(NULL)';
-            $user->nome_responsavel = '(NULL)';
+            $user->razao_social = NULL;
+            $user->cnpj = NULL;
+            $user->nome_responsavel = NULL;
         } else {
             $user->razao_social = $dadosForm['razaoSocial'];
+            $user->tipo_pessoa = 'pessoaJuridica';
             $user->cnpj = $dadosForm['cnpj'];
             $user->nome_responsavel = $dadosForm['nomeResponsavel'];
-            $user->nome_completo = '(NULL)';
-            $user->cpf = '(NULL)';
+            $user->nome_completo = NULL;
+            $user->cpf = NULL;
         }
 
         $user->complemento = $dadosForm['complemento'];
-        $user->assunto = $dadosForm['assunto'];
-        $user->telefone = $dadosForm['telefone'];
-        $user->cep = $dadosForm['cep'];
-
+        $user->cep = intval($dadosForm['cep']);
+        $user->senha = $dadosForm['senha'];
         $user->confirmar_senha = $dadosForm['confirmarSenha'];
-        //$user->data_nascimento = $dadosForm['dataNascimento'];
+        $user->data_nascimento = $dadosForm['dataNascimento'];
         $user->celular = $dadosForm['celular'];
+        $user->telefone = $dadosForm['telefone'];
         $user->email = $dadosForm['email'];
         $user->endereco = $dadosForm['endereco'];
         $user->estado_civil = $dadosForm['estadoCivil'];
-        $user->mensagem = $dadosForm['mensagem'];
         $user->nacionalidade = $dadosForm['nacionalidade'];
-        $user->prioridade = $dadosForm['prioridade'];
-        $user->senha = $dadosForm['senha'];
+        $user->bairro = $dadosForm['bairro'];
+        $user->cidade = $dadosForm['cidade'];
         $user->sexo = $dadosForm['sexo'];
-        $user->tipo = $dadosForm['tipo'];
-        $user->tipo_sigilo = $dadosForm['solicitacao'];
         $user->save();
+
+        $ultimoAtendimento = OuvidoriaAtendimento::where('ano', date('Y'))->orderBy('id', 'desc')->first();
+        $numero = $ultimoAtendimento ? $ultimoAtendimento->numero + 1 : 1;
+        $codigo = preg_replace('/(\d{4})(\d{3})(\d{3})/', '$1.$2.$3', substr(str_pad(time(), 10, '0', STR_PAD_LEFT), -10));
+
+        // CADASTRO DO ATENDIMENTO
+        $atendimento = new OuvidoriaAtendimento;
+        $atendimento->id_usuario = $user->id;
+        $atendimento->numero = $numero;
+        $atendimento->ano = date('Y');
+        $atendimento->situacao = 'Novo';
+        $atendimento->codigo = $codigo;
+        $atendimento->sigiloso = $dadosForm['sigiloso'];
+        $atendimento->assunto = $dadosForm['assunto'];
+        $atendimento->prioridade = $dadosForm['prioridade'];
+        $atendimento->tipo = $dadosForm['tipo']; //elogio, reaclamacao
+        $atendimento->save();
+
+        // CADASTRO DA MENSAGEM
+        $mensagem = new OuvidoriaMensagem;
+        $mensagem->id_atendimento = $atendimento->id;
+        $mensagem->mensagem = $dadosForm['mensagem'];
+        $mensagem->arquivo = $nome_arquivo;
+        $mensagem->autor = 'usuario'; // 'camara'
+        $mensagem->save();
 
         // CADASTRO
 
-        // $atendimento = new OuvidoriaAtendimento;
-        // $atendimento->ticket_number = 123;
-        // $atendimento->save();
-
-        // $retorno = [
-        //     'status' => true,
-        //     'msg' => 'Cadastro efetuado com sucesso!',
-        //     'id' => $atendimento->id
-        // ];
-        // return response()->json($retorno);
-
-        $usuario = OuvidoriaUsuario::find(29);
-
+        //$usuario = OuvidoriaUsuario::find(29);
 
         // É OBRIGATÓRIO RETORNAR ALGUMA COISA
-        $retorno = [
-            'data' => $dadosForm,
-            'user' => $usuario,
-        ];
-        //return response()->json($retorno);
-
-        return view('homepage', $retorno);
-
-
-        //     $arrayTeste = [
-        //         'nome' => '123',
-        //         'aaaa' => $atendimento,
-        //         'respostas' => $password,
-        //         'lalala' => 'askdklasdkasdkj',
-        //         'abacate' => $usuarios,
-        //     ];
-
-        //     return view('homepage', $arrayTeste);
-        // }
-
+        return response()->json([
+            'status' => true,
+            'msg' => 'Solicitação cadastrada com sucesso!',
+            'dados' => $dadosForm
+        ]);
 
         // public function atendimento(Request $request, $id)
         // {
@@ -114,5 +108,12 @@ class OuvidoriaController extends Controller
         //         'at' => $atendimento
         //     ]);
         // }
+
+        // $retorno = [
+        //     'status' => true,
+        //     'msg' => 'Cadastro efetuado com sucesso!',
+        //     'id' => $atendimento->id
+        // ];
+        // return response()->json($retorno);
     }
 }

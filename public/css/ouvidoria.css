@@ -194,7 +194,7 @@ input {
     flex-wrap: wrap;
     gap: 15px;
     justify-content: flex-start;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     margin-top: 25px;
 }
 
@@ -343,4 +343,15 @@ input:focus {
     .sigilo {
         height: 65px;
     }
+}
+
+p.msg-senha {
+    font-size: 12px;
+    margin: 0;
+    color: red;
+    margin-top: 5px;
+}
+
+textarea#mensagem {
+    padding: 10px;
 }

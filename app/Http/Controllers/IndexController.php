@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OuvidoriaAtendimento;
+use App\Models\OuvidoriaMensagem;
 use App\Models\OuvidoriaResposta;
 use App\Models\OuvidoriaUsuario;
 use Illuminate\Http\Request;
@@ -13,6 +14,8 @@ class IndexController extends Controller
 
     public function home(Request $request, $dados = [])
     {
+
+
 
         // $usuario = new OuvidoriaUsuario;
         // $usuario->nome_completo = 'Teste';
@@ -45,10 +48,9 @@ class IndexController extends Controller
 
         // /ouvidoria/consulta/1
 
-        $atendimento = OuvidoriaUsuario::find(34);
+        // $atendimento = OuvidoriaUsuario::find(34);
 
-        $password = OuvidoriaUsuario::where('cpf', '39590044867')->get()->first();
-
+        // $password = OuvidoriaUsuario::where('cpf', '39590044867')->get()->first();
 
 
 
@@ -74,24 +76,37 @@ class IndexController extends Controller
         // FOREACH
         // MOSTRAR LISTA DE RESULTADOS COM FOREACH NO FRONT
 
-        $arrayTeste = [
-            'nome' => '123',
-            'aaaa' => $atendimento,
-            'respostas' => $password,
-            'lalala' => 'askdklasdkasdkj',
-            //'abacate' => $usuarios,
-        ];
+        // $arrayTeste = [
+        //     'nome' => '123',
+        //     'aaaa' => $atendimento,
+        //     'respostas' => $password,
+        //     'lalala' => 'askdklasdkasdkj',
+        //     //'abacate' => $usuarios,
+        // ];
 
-        return view('homepage', $arrayTeste);
+        // return view('homepage', $arrayTeste);
     }
 
 
-    // public function atendimento(Request $request, $id)
-    // {
-    //     $atendimento = OuvidoriaAtendimento::find($id);
+    public function atendimento(Request $request, $id)
+    {
+        $atendimento = OuvidoriaAtendimento::find($id);
+        $mensagens = OuvidoriaMensagem::where('id_atendimento', $id)->get()->all();
+        $user = OuvidoriaUsuario::find($id);
 
-    //     return view('atendimento', [
-    //         'at' => $atendimento
-    //     ]);
-    // }
+
+        if (!$atendimento) return view('404', ['msg' => 'Página não encontrada!']);
+
+
+        return view('ouvidoria-atendimento', [
+            'atendimento' => $atendimento,
+            'mensagens' => $mensagens,
+            'user' => $user,
+        ]);
+    }
+
+    public function atendimentos(Request $request)
+    {
+        return view('ouvidoria-atendimentos');
+    }
 }

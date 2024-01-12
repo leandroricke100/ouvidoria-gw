@@ -17,9 +17,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 
-    {{-- <link
+    <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet"> --}}
+        rel="stylesheet">
 
 </head>
 
@@ -104,7 +104,7 @@
 
         <section>
 
-            {{-- <p style="display: none;" class="msg"></p> --}}
+
 
             <p>Preencha os campos abaixo para realizar seu cadastro.<br>
                 Eles são importantes para que você possa realizar e acompanhar solicitações junto à Ouvidoria da câmara.
@@ -130,12 +130,12 @@
                 </div>
 
                 <div class="sigilo">
-                    <input type="radio" id="semSigilo" name="solicitacao" value="semSigilo" checked required>
+                    <input type="radio" id="semSigilo" name="sigiloso" value="0" checked required>
                     <label for="semSigilo" style="margin-bottom: -4px;">
                         Sem sigilo
                     </label>
 
-                    <input style="margin-left: 15px" type="radio" id="sigilo" name="solicitacao" value="sigilo"
+                    <input style="margin-left: 15px" type="radio" id="sigilo" name="sigiloso" value="1"
                         required>
                     <label for="sigilo" style="margin-bottom: -4px;">Sigiloso</label>
                 </div>
@@ -147,7 +147,7 @@
                         <label for="nomeCompleto">Nome completo <span class="campo-obrigatorio"><span
                                     class="campo-obrigatorio">*</span></span></label>
                         <input type="text" id="nomeCompleto" name="nomeCompleto"
-                            placeholder="Digite seu nome completo">
+                            placeholder="Digite seu nome completo" required>
                     </div>
 
                     <div class="field pj">
@@ -158,7 +158,7 @@
 
                     <div class="field pf">
                         <label for="cpf">CPF <span class="campo-obrigatorio">*</span></label>
-                        <input type="number" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
+                        <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
                     </div>
 
                     <div class="field pj">
@@ -173,9 +173,8 @@
                     </div>
 
                     <div class="field">
-                        <label for="telefone">Telefone <span class="campo-obrigatorio">*</span></label>
-                        <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone"
-                            required>
+                        <label for="telefone">Telefone </label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone">
                     </div>
 
                     <div class="field">
@@ -190,7 +189,7 @@
                             <label for="nomeResponsavel">Nome do responsável <span
                                     class="campo-obrigatorio">*</span></label>
                             <input type="text" id="nomeResponsavel" name="nomeResponsavel"
-                                placeholder="Digite o nome do responsáavel">
+                                placeholder="Digite o nome do responsáavel" required>
                         </div>
                     </div>
 
@@ -244,18 +243,17 @@
 
                     <div class="field">
                         <label for="cep">CEP <span class="campo-obrigatorio">*</span></label>
-                        <input type="number" id="cep" name="cep" placeholder="CEP" required>
+                        <input type="text" id="cep" name="cep" placeholder="CEP" required>
                     </div>
 
                     <div class="field">
                         <label for="complemento">Complemento </label>
-                        <input type="text" id="complemento" name="complemento" placeholder="Complemento"
-                            required>
+                        <input type="text" id="complemento" name="complemento" placeholder="Complemento">
                     </div>
 
                     <div class="field">
                         <label for="bairro">Bairro <span class="campo-obrigatorio">*</span></label>
-                        <input type="bairro" id="bairro" name="endereco" placeholder="Bairro" required>
+                        <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
                     </div>
 
                     <div class="field">
@@ -273,6 +271,7 @@
                             <label for="senha">Senha <span class="campo-obrigatorio">*</span></label>
                             <input type="password" id="senha" name="senha" placeholder="Digite sua senha"
                                 required>
+                            <p style="display: none" class="msg-senha">Senhas não conferem</p>
                         </div>
 
                         <div class="field">
@@ -280,6 +279,7 @@
                                     class="campo-obrigatorio">*</span></label>
                             <input type="password" id="confirmarSenha" name="confirmarSenha"
                                 placeholder="Digite sua senha" required>
+                            <p style="display: none" class="msg-senha">Senhas não conferem</p>
                         </div>
                     </div>
 
@@ -311,16 +311,15 @@
                 </div>
                 <div class="cadastro">
                     <div class="field">
-                        <label for="assunto">Assunto</label>
+                        <label for="assunto">Assunto <span class="campo-obrigatorio">*</span></label>
                         <input type="text" id="assunto" name="assunto"
-                            placeholder="Digite aqui o assunto de sua solicitação">
+                            placeholder="Digite aqui o assunto de sua solicitação" required>
                     </div>
                 </div>
                 <div class="cadastro">
-                    <label for="mensagem">Mensagem</label>
+                    <label for="mensagem">Mensagem <span class="campo-obrigatorio">*</span></label>
                     <textarea id="mensagem" name="mensagem" rows="8" cols="50" class="text-area"
-                        placeholder="Digite aqui sua mensagem">
-                        </textarea>
+                        placeholder="Digite aqui sua mensagem" required></textarea>
 
                 </div>
 
@@ -332,8 +331,7 @@
                         </div>
 
                         <div class="button-cad">
-                            <button class="button-voltar" type="button"
-                                onclick="efetuarCadastro();">Cadastrar</button>
+                            <button class="button-voltar" type="submit">Cadastrar</button>
                         </div>
                     </div>
                 </div>

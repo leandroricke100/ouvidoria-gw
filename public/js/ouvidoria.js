@@ -1,5 +1,8 @@
 function openModal() {
     const email = $("#emailCadastro").val();
+
+    document.getElementById('email').value = email;
+
     if (email == "") {
         alert("Preencha um email");
     } else {
@@ -21,13 +24,31 @@ $(function () {
         if (tipo === "pessoaFisica") {
             $(".pf").show();
             $(".pj").hide();
+            document.getElementById("razaoSocial").removeAttribute("required");
+            document.getElementById("cnpj").removeAttribute("required");
+            document.getElementById("nomeResponsavel").removeAttribute("required");
         } else {
             $(".pf").hide();
             $(".pj").show();
+            document.getElementById("nomeCompleto").removeAttribute("required");
+            document.getElementById("cpf").removeAttribute("required");
         }
     });
 
     $('[name="tipoCadastro"]').change();
+
+
+    $('#confirmarSenha').change(function () {
+        let conf_senha = $(this).val();
+        let senha = $('#senha').val();
+
+        if (senha != conf_senha) {
+            $('.msg-senha').show();
+        } else {
+            $('.msg-senha').hide();
+        }
+    });
+
 });
 
 function login() {
@@ -48,7 +69,6 @@ function inicio() {
     location.replace("/ouvidoria");
 }
 
-
 function efetuarCadastro() {
     let dadosForm = new FormData($('#cad-atendimento')[0]);
 
@@ -63,33 +83,24 @@ function efetuarCadastro() {
         data: dadosForm,
         success: function (resposta) {
             console.log(resposta);
-            console.log('tudo ok')
-
-            if (resposta.status == false) {
+            if (resposta.status) {
+                alert(resposta.msg);
                 //$('.msg').text(resposta.msg);
                 //$('.msg').show();
-
-                console.log('deu errado')
+                // location.replace('/atendimento/' + resposta.id);
             } else {
-                // exibe msg
-                console.log('tudo ok')
-                //location.replace('/atendimento/' + resposta.id);
+                alert(resposta.msg);
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('Deu erro');
+            alert('teste' + error);
         }
     });
 
 }
-
-
-
-
-
-
-
-
-
-$(() => $('form').submit((e) => e.preventDefault()));
+$(() => $('form').submit(function (e) {
+    console.log('TEste');
+    efetuarCadastro();
+    e.preventDefault();
+}));
