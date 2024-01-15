@@ -49,6 +49,11 @@ $(function () {
         }
     });
 
+
+    $('[name="prioridade"]').on('change', function () {
+        // teste
+    });
+
 });
 
 function login() {
@@ -85,9 +90,6 @@ function efetuarCadastro() {
             console.log(resposta);
             if (resposta.status) {
                 alert(resposta.msg);
-                //$('.msg').text(resposta.msg);
-                //$('.msg').show();
-                // location.replace('/atendimento/' + resposta.id);
             } else {
                 alert(resposta.msg);
             }
@@ -100,7 +102,8 @@ function efetuarCadastro() {
 
 }
 $(() => $('form').submit(function (e) {
-    console.log('TEste');
     efetuarCadastro();
     e.preventDefault();
 }));
+
+

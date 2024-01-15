@@ -10,9 +10,12 @@ use Illuminate\Http\Request;
 
 class OuvidoriaController extends Controller
 {
+
+
     public function geral(Request $request)
     {
         $dadosForm = $request->all();
+
         // UPLOAD DO ARQUIVO
         $nome_arquivo = null;
         if ($request->file('arquivo')) {
@@ -79,6 +82,7 @@ class OuvidoriaController extends Controller
         $atendimento->assunto = $dadosForm['assunto'];
         $atendimento->prioridade = $dadosForm['prioridade'];
         $atendimento->tipo = $dadosForm['tipo']; //elogio, reaclamacao
+        $atendimento->status = 'Aguardando resposta da Câmara';
         $atendimento->save();
 
         // CADASTRO DA MENSAGEM
@@ -90,6 +94,8 @@ class OuvidoriaController extends Controller
         $mensagem->save();
 
         // CADASTRO
+
+
 
         //$usuario = OuvidoriaUsuario::find(29);
 
@@ -115,5 +121,47 @@ class OuvidoriaController extends Controller
         //     'id' => $atendimento->id
         // ];
         // return response()->json($retorno);
+    }
+
+    public function admin(Request $request)
+    {
+
+        $dadosRespostForm = $request->all();
+
+        //UPLOAD DO ARQUIVO
+        $nome_arquivo = null;
+        if ($request->file('arquivo')) {
+            $FileHelper = new FileHelper;
+            $infoAnexoImg = $FileHelper->upload([
+                'file' => $request->file('arquivo'),
+                'pasta' => 'ouvidoria/arquivos',
+                'nome' => 'Arquivo Ouvidoria',
+                'observacao' => '',
+                'temporario' => false,
+                'restrito' => true,
+            ]);
+            $nome_arquivo = $infoAnexoImg['status'] ? $infoAnexoImg['nome_arquivo'] : null;
+
+            if (!$infoAnexoImg['status']) return ['status' => false, 'msg' => 'Falha no upload do arquivo.', 'retorno' => $infoAnexoImg];
+        }
+
+        // RESPOSTA DO ADMIN
+
+        $resposta = new OuvidoriaMensagem;
+        $resposta->id_atendimento = $dadosRespostForm['id_atendimento'];
+        $resposta->autor = $dadosRespostForm['autor'];
+        $resposta->mensagem = $dadosRespostForm['atendimentoRes'];
+        $resposta->arquivo = $nome_arquivo;
+        $resposta->save();
+
+
+
+
+        // É OBRIGATÓRIO RETORNAR ALGUMA COISA
+        return response()->json([
+            'status' => true,
+            'msg' => 'Solicitação cadastrada com sucesso!',
+            'dados' => $dadosRespostForm
+        ]);
     }
 }

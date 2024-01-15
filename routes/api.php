@@ -18,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/Ouvidoria', [OuvidoriaController::class, 'geral']);
+
+Route::post('/admin/ouvidoria/atendimento/{id}', [OuvidoriaController::class, 'admin'])->name('admin-atendimento-unique');

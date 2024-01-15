@@ -222,10 +222,11 @@ button.button-voltar {
 .btn-visualizar {
     border: none;
     background: #2c7bff;
-    padding: 6px;
-    border-radius: 7px;
+    padding: 10px 17px;
+    border-radius: 10px;
     color: #fff;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .btn-visualizar:hover {
@@ -235,4 +236,20 @@ button.button-voltar {
 input#assunto {
     border-radius: 5px;
     padding: 10px;
+}
+
+.btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+select#tipo {
+    padding: 6px;
+    border: 1px solid #c9c9c9;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 15px;
+    max-width: 130px;
 }

@@ -1,5 +1,9 @@
 @inject('Helper', '\App\Helper\Helper')
 
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -7,28 +11,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ouvidoria - Atendimento {{ $Helper->leftPad($atendimento->numero) }}/{{ $atendimento->ano }}
+    <title>ADMIN-Atendimento {{ $Helper->leftPad($atendimento->numero) }}/{{ $atendimento->ano }}
     </title>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/ouvidoria-resposta.js') }}"></script>
 
-    <link href="{{ asset('css/ouvidoria-atendimento.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/admin-atendimento.css') }}?v={{ time() }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
 </head>
 
 <body>
     <div id="atendimento" class="atendimento">
-        <div class="logout-top">
-            <div class="voltar-top">
-                <button class="button-voltar" onclick="inicio()">Voltar</button>
-            </div>
 
-            <div class="logado">
-                <span><strong>Logado:
-                    </strong>{{ substr($user->email, 0, 3) . '***@***' . substr($user->email, -4) }}</span>
-                <button class="button-sair" onclick="inicio()">Sair</button>
-            </div>
-        </div>
         <div class="ticket">
             <div class="number-atendimento">
                 <i class="far fa-bullhorn"></i>
@@ -36,9 +31,28 @@
                 <p> - {{ $Helper->leftPad($atendimento->numero) }}/{{ $atendimento->ano }}</p>
             </div>
             <div class="info-atendimento">
-                <span><strong>Situação atual: </strong>{{ $atendimento->situacao }}</span>
-                <span><strong>Código:</strong> nº {{ $atendimento->codigo }}</span>
-                <span><strong>Status: </strong>{{ $atendimento->status }}</span>
+
+                <div>
+                    <label for="situacao"><strong>Situação atual: </strong></label>
+                    <select id="situacao" name="situacao">
+                        <option value="novo" {{ $atendimento->situacao == 'novo' ? 'selected' : '' }}>Novo</option>
+                        <option value="andamento" {{ $atendimento->situacao == 'andamento' ? 'selected' : '' }}>
+                            Andamento</option>
+                        <option value="finalizado" {{ $atendimento->situacao == 'finalizado' ? 'selected' : '' }}>
+                            Finalizado</option>
+                    </select>
+                </div>
+                <div>
+                    <span><strong>Código:</strong> nº {{ $atendimento->codigo }}</span>
+                </div>
+                <div>
+                    <label for="resposta"><strong>Aguardando resposta:</strong></label>
+                    <select id="resposta" name="resposta">
+                        <option value="camara" {{ $mensagens[0]->autor == 'camara' ? 'selected' : '' }}>Camâra</option>
+                        <option value="usuario" {{ $mensagens[0]->autor == 'usuario' ? 'selected' : '' }}>Usuário
+                        </option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -56,10 +70,12 @@
             </div>
             <div class="info">
                 <div class="title user">
-                    <h1 class="assunto">Assunto: {{ $atendimento->assunto }}</h1>
+
+                    <h1>Assunto: {{ $atendimento->assunto }}</h1>
                 </div>
 
                 <p>{{ $mensagens[0]->mensagem }}</p>
+
                 @if ($mensagens[0]->arquivo !== null)
                     <div class="anexos">
                         Anexos: <a href="/arquivo/{{ $mensagens[0]->arquivo }}" target="blank"><i
@@ -70,6 +86,7 @@
             </div>
         </div>
 
+
         @foreach ($mensagens as $mensagem)
             @if (!$loop->first)
                 <div class="res {{ $mensagem->autor == 'camara' ? '' : 'usuario' }}">
@@ -79,10 +96,14 @@
                                 <i class="fas fa-university" style="margin-right: 8px"></i>
                                 Camâra municipal de viçosa
                             </h1>
+
+                            <div class="trash">
+                                <i class="fas fa-trash-alt"></i>
+                            </div>
                         @else
                             <h1>
                                 <i class="fas fa-user" style="margin-right: 8px"></i>
-                                Você
+                                Usuario
                             </h1>
                         @endif
 
@@ -101,10 +122,12 @@
 
 
 
-        <form class="new-text">
-            <label for="atendimento"><strong>Interagir em Atendimento</strong></label>
-            <textarea id="atendimento" name="atendimento" class="atendimento" rows="8"></textarea>
+        <form class="new-text form" id="cad-resposta">
+            <label for="atendimentoRes"><strong>Interagir em Atendimento</strong></label>
+            <textarea id="atendimentoRes" name="atendimentoRes" class="atendimentoRes" rows="8"></textarea>
             <input type="file" id="arquivo" name="arquivo">
+            <input type="hidden" name="autor" id="autor" value="camara">
+            <input type="hidden" name="id_atendimento" id="id_atendimento" value="{{ $atendimento->numero }}">
             <button type="submit">ENVIAR</button>
         </form>
     </div>

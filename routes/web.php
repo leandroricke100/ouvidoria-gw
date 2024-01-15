@@ -24,10 +24,12 @@ Route::get('/arquivo/{id}/{op?}', [IndexArquivo::class, 'index'])->name('pg-arqu
 // OUVIDORIA
 
 // CONSULTAR ATENDIMENTO
-Route::get('/ouvidoria/atendimento/{id}', [IndexController::class, 'atendimento']);
+Route::get('/ouvidoria/atendimento/{id}', [IndexController::class, 'atendimento'])->name('usuario-atendimento');
+
+Route::get('/admin/ouvidoria/atendimento/{id}', [IndexController::class, 'admin'])->name('admin-atendimento');
 
 // CONSULTAR LISTA DE ATENDIMENTOS
-Route::get('/ouvidoria/atendimentos', [IndexController::class, 'atendimentos']);
+Route::get('/ouvidoria/atendimentos', [IndexController::class, 'atendimentos'])->name('usuario-atendimentos');
 
 // CADASTRAR NOVA SOLICITAÇÃO
 Route::get('/ouvidoria', function () {

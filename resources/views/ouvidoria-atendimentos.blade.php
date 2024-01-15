@@ -8,6 +8,7 @@
     <title>Ouvidoria - Atendimentos</title>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/ouvidoria.js') }}"></script>
 
     <link href="{{ asset('css/ouvidoria-atendimentos.css') }}?v={{ time() }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
@@ -29,46 +30,44 @@
             </div>
         </div>
 
-        <div class="container">
+        @if (!$atendimentos)
+            <h1>Nenhum atendimento</h1>
+        @else
+            <div class="container">
+                @foreach ($atendimentos as $atendimento)
+                    <div class="info">
+                        <div class="title">
+                            <h1>{{ $atendimento->assunto }}</h1>
+                            <strong>
+                                <p>Em: {{ date('d/m/Y', strtotime($atendimento->created_at)) }}</p>
+                            </strong>
+                        </div>
+                        <div class="btn">
+                            <span><strong>Tipo: </strong>{{ $atendimento->tipo }}</span>
+                            <span><strong>Status: </strong>Aguardando resposta da Câmara</span>
+                            <a class="btn-visualizar"
+                                href="{{ route('usuario-atendimento', ['id' => $atendimento->id]) }}">Visualizar</a>
+                        </div>
+                    </div>
+                @endforeach
 
-            <div class="info">
-                <div class="title">
-                    <h1>Assistência social</h1>
-                    <strong>
-                        <p>Em: 12/01/2024</p>
-                    </strong>
-                </div>
-
-                <button class="btn-visualizar">Visualizar</button>
 
             </div>
-
-            <div class="info">
-                <div class="title">
-                    <h1>Despesas</h1>
-                    <strong>
-                        <p>Em: 14/09/2023</p>
-                    </strong>
-                </div>
-
-                <button class="btn-visualizar">Visualizar</button>
-            </div>
-
-            <div class="info">
-                <div class="title">
-                    <h1>Site</h1>
-                    <strong>
-                        <p>Em: 25/12/2023</p>
-                    </strong>
-                </div>
-
-                <button class="btn-visualizar">Visualizar</button>
-            </div>
-        </div>
+        @endif
 
         <div class="new-text">
 
             <label for="atendimento"><strong>Novo atendimento <i class="fas fa-plus"></i></strong></label>
+
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo" required>
+                <option value="" disabled selected>Selecione</option>
+                <option value="denuncia">Denúncia</option>
+                <option value="elogio">Elogio</option>
+                <option value="reclamacao">Reclamação</option>
+                <option value="sugestao">Sugestão</option>
+                <option value="simplificada">Simplificada</option>
+            </select>
 
             <label for="assunto">Assunto *</label>
             <input type="text" id="assunto" name="assunto" placeholder="Digite aqui o assunto da nova solicitação"

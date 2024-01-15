@@ -150,7 +150,9 @@ button.button-voltar {
 
 .info-atendimento {
     display: flex;
-    gap: 15px;
+    align-items: center;
+    gap: 18px;
+    justify-content: center;
 }
 
 .info-atendimento span {
@@ -186,6 +188,10 @@ button.button-voltar {
 
     .info-atendimento {
         flex-direction: column;
+    }
+
+    .atendimento {
+        padding: 0px;
     }
 }
 
@@ -239,13 +245,22 @@ button.button-voltar {
     justify-content: space-between;
 }
 
-h1.assunto {
-    font-size: 16px;
+select#resposta {
+    border: 1px solid #c9c9c9;
+    border-radius: 6px;
+    font-size: 17px;
+    outline: none;
 }
 
-.far {
-    font-family: 'Font Awesome 5 Pro';
-    font-weight: 400;
+.sec {
+    display: flex;
+    justify-content: space-between;
+    color: #636363;
+    cursor: pointer;
+}
+
+.fa-trash-alt:before {
+    content: "\f2ed";
     font-size: 20px;
 }
 
@@ -258,4 +273,11 @@ h1.assunto {
     content: "\f56c";
     color: black;
     margin-left: 4px;
+}
+
+select#situacao {
+    border: 1px solid #c9c9c9;
+    border-radius: 6px;
+    font-size: 17px;
+    outline: none;
 }
