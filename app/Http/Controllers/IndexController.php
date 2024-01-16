@@ -15,7 +15,6 @@ class IndexController extends Controller
     {
     }
 
-
     public function atendimento(Request $request, $id)
     {
         $atendimento = OuvidoriaAtendimento::find($id);
@@ -51,7 +50,6 @@ class IndexController extends Controller
 
     public function admin(Request $request, $id)
     {
-
 
         $atendimento = OuvidoriaAtendimento::find($id);
         $mensagens = OuvidoriaMensagem::where('id_atendimento', $id)->orderBy('id')->get()->all();

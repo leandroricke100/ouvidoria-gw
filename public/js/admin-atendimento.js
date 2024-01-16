@@ -71,10 +71,12 @@ $(() => {
 function updateInput() {
     let inputSitucao = $('#situacao').val();
     let inputResposta = $('#resposta').val();
+    let id = $('#id').val();
 
     let dadosForm = {
-        'situacao': inputSitucao,
-        'resposta': inputResposta,
+        situacao: inputSitucao,
+        resposta: inputResposta,
+        id: id,
     };
 
 
@@ -95,7 +97,7 @@ function updateInput() {
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste' + error);
+            alert('teste');
         }
     });
 

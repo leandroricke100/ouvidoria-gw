@@ -231,7 +231,7 @@ class OuvidoriaController extends Controller
 
         $dadosForm = $request->all();
 
-        $atendimento = OuvidoriaAtendimento::where('id', 2)->first();
+        $atendimento = OuvidoriaAtendimento::find($dadosForm['id']);
         $atendimento->situacao = $dadosForm['situacao'];
         if ($dadosForm['resposta'] == 'usuario') {
             $atendimento->status = 'Aguardando resposta do Usuário';

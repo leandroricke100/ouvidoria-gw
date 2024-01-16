@@ -27,7 +27,7 @@
                 <p> - {{ $Helper->leftPad($atendimento->numero) }}/{{ $atendimento->ano }}</p>
             </div>
             <div class="info-atendimento">
-
+                <input type="hidden" name="id" id="id" value="{{ $atendimento->id }}">
                 <div>
                     <label for="situacao"><strong>Situação atual: </strong></label>
                     <select id="situacao" name="situacao">
