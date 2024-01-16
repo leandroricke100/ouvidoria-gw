@@ -234,8 +234,15 @@ button.button-voltar {
 }
 
 input#assunto {
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    /* padding: 10px; */
     padding: 10px;
+    border: 1px solid #c9c9c9;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 15px;
+    flex: 1;
 }
 
 .btn {
@@ -251,5 +258,43 @@ select#tipo {
     font-size: 14px;
     outline: none;
     margin-bottom: 15px;
-    max-width: 130px;
+    flex: 1;
+}
+
+.assunto-obg {
+
+    margin: 0 0;
+    margin-bottom: 5px;
+    margin-top: -6px;
+    color: red;
+
+}
+
+.container-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    gap: 12px;
+}
+
+select#prioridade {
+    padding: 6px;
+    border: 1px solid #c9c9c9;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 15px;
+    flex: 1;
+}
+
+select#sigilo {
+    padding: 6px;
+    border: 1px solid #c9c9c9;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 15px;
+    flex: 1;
 }

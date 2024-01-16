@@ -1,7 +1,7 @@
 function openModal() {
     const email = $("#emailCadastro").val();
 
-    document.getElementById('email').value = email;
+    //document.getElementById('email').value = email;
 
     if (email == "") {
         alert("Preencha um email");
@@ -50,9 +50,9 @@ $(function () {
     });
 
 
-    $('[name="prioridade"]').on('change', function () {
-        // teste
-    });
+    // $('[name="prioridade"]').on('change', function () {
+    //     // teste
+    // });
 
 });
 

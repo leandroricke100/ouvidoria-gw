@@ -1,9 +1,5 @@
 @inject('Helper', '\App\Helper\Helper')
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -15,7 +11,7 @@
     </title>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/ouvidoria-resposta.js') }}"></script>
+    <script src="{{ asset('js/admin-atendimento.js') }}"></script>
 
     <link href="{{ asset('css/admin-atendimento.css') }}?v={{ time() }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
@@ -97,9 +93,9 @@
                                 Camâra municipal de viçosa
                             </h1>
 
-                            <div class="trash">
+                            <button class="trash" onclick="deleteMsg({{ $mensagem->id }})">
                                 <i class="fas fa-trash-alt"></i>
-                            </div>
+                            </button>
                         @else
                             <h1>
                                 <i class="fas fa-user" style="margin-right: 8px"></i>

@@ -262,6 +262,7 @@ select#resposta {
 .fa-trash-alt:before {
     content: "\f2ed";
     font-size: 20px;
+    cursor: pointer;
 }
 
 .anexos {
@@ -280,4 +281,10 @@ select#situacao {
     border-radius: 6px;
     font-size: 17px;
     outline: none;
+}
+
+button.trash {
+    border: none;
+    background-color: transparent;
+    color: red;
 }

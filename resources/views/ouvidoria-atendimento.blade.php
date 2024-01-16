@@ -11,6 +11,9 @@
     </title>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/ouvidoria-atendimento.js') }}"></script>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <link href="{{ asset('css/ouvidoria-atendimento.css') }}?v={{ time() }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
@@ -25,7 +28,14 @@
 
             <div class="logado">
                 <span><strong>Logado:
-                    </strong>{{ substr($user->email, 0, 3) . '***@***' . substr($user->email, -4) }}</span>
+                    </strong>
+
+                    @if ($user->cpf)
+                        {{ substr($user->cpf, 0, 3) . '******' . substr($user->cpf, -2) }}
+                    @else
+                        {{ substr($user->email, 0, 3) . '***@***' . substr($user->email, -2) }}
+                    @endif
+                </span>
                 <button class="button-sair" onclick="inicio()">Sair</button>
             </div>
         </div>
@@ -101,10 +111,12 @@
 
 
 
-        <form class="new-text">
-            <label for="atendimento"><strong>Interagir em Atendimento</strong></label>
-            <textarea id="atendimento" name="atendimento" class="atendimento" rows="8"></textarea>
+        <form class="new-text form" id="cad-resposta-user">
+            <label for="atendimentoUsuario"><strong>Interagir em Atendimento</strong></label>
+            <textarea id="atendimentoUsuario" name="atendimentoUsuario" class="atendimentoUsuario" rows="8"></textarea>
             <input type="file" id="arquivo" name="arquivo">
+            <input type="hidden" name="autor" id="autor" value="usuario">
+            <input type="hidden" name="id_atendimento" id="id_atendimento" value="{{ $atendimento->numero }}">
             <button type="submit">ENVIAR</button>
         </form>
     </div>

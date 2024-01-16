@@ -4,19 +4,10 @@ use App\Http\Controllers\OuvidoriaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
-
-
-Route::post('/Ouvidoria', [OuvidoriaController::class, 'geral']);
-
-Route::post('/admin/ouvidoria/atendimento/{id}', [OuvidoriaController::class, 'admin'])->name('admin-atendimento-unique');
+Route::post('/Ouvidoria', [OuvidoriaController::class, 'cadastro']);
+Route::post('/OuvidoriaMensagemAdmin', [OuvidoriaController::class, 'mensagemAdmin']);
+Route::post('/OuvidoriaMensagemUser', [OuvidoriaController::class, 'mensagemUsuario']);
+Route::post('/OuvidoriaDeleteMensagem', [OuvidoriaController::class, 'deleteMsg']);
+Route::post('/OuvidoriaInputAdmin', [OuvidoriaController::class, 'inputAdmin']);
+Route::post('/OuvidoriaAtendimento', [OuvidoriaController::class, 'atendimento']);

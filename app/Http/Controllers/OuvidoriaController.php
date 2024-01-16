@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 
 class OuvidoriaController extends Controller
 {
-
-
-    public function geral(Request $request)
+    public function cadastro(Request $request)
     {
         $dadosForm = $request->all();
 
@@ -90,45 +88,20 @@ class OuvidoriaController extends Controller
         $mensagem->id_atendimento = $atendimento->id;
         $mensagem->mensagem = $dadosForm['mensagem'];
         $mensagem->arquivo = $nome_arquivo;
-        $mensagem->autor = 'usuario'; // 'camara'
+        $mensagem->autor = 'usuario';
         $mensagem->save();
 
-        // CADASTRO
-
-
-
-        //$usuario = OuvidoriaUsuario::find(29);
-
-        // É OBRIGATÓRIO RETORNAR ALGUMA COISA
         return response()->json([
             'status' => true,
             'msg' => 'Solicitação cadastrada com sucesso!',
             'dados' => $dadosForm
         ]);
-
-        // public function atendimento(Request $request, $id)
-        // {
-        //     $atendimento = OuvidoriaAtendimento::find($id);
-
-        //     return view('atendimento', [
-        //         'at' => $atendimento
-        //     ]);
-        // }
-
-        // $retorno = [
-        //     'status' => true,
-        //     'msg' => 'Cadastro efetuado com sucesso!',
-        //     'id' => $atendimento->id
-        // ];
-        // return response()->json($retorno);
     }
 
-    public function admin(Request $request)
+    public function mensagemAdmin(Request $request)
     {
+        $dadosForm = $request->all();
 
-        $dadosRespostForm = $request->all();
-
-        //UPLOAD DO ARQUIVO
         $nome_arquivo = null;
         if ($request->file('arquivo')) {
             $FileHelper = new FileHelper;
@@ -145,23 +118,133 @@ class OuvidoriaController extends Controller
             if (!$infoAnexoImg['status']) return ['status' => false, 'msg' => 'Falha no upload do arquivo.', 'retorno' => $infoAnexoImg];
         }
 
-        // RESPOSTA DO ADMIN
-
         $resposta = new OuvidoriaMensagem;
-        $resposta->id_atendimento = $dadosRespostForm['id_atendimento'];
-        $resposta->autor = $dadosRespostForm['autor'];
-        $resposta->mensagem = $dadosRespostForm['atendimentoRes'];
+        $resposta->id_atendimento = $dadosForm['id_atendimento'];
+        $resposta->autor = $dadosForm['autor'];
+        $resposta->mensagem = $dadosForm['atendimentoRes'];
         $resposta->arquivo = $nome_arquivo;
         $resposta->save();
 
-
-
-
-        // É OBRIGATÓRIO RETORNAR ALGUMA COISA
         return response()->json([
             'status' => true,
             'msg' => 'Solicitação cadastrada com sucesso!',
-            'dados' => $dadosRespostForm
+            'dados' => $dadosForm
+        ]);
+    }
+
+    public function mensagemUsuario(Request $request)
+    {
+
+        $dadosForm = $request->all();
+
+        $nome_arquivo = null;
+        if ($request->file('arquivo')) {
+            $FileHelper = new FileHelper;
+            $infoAnexoImg = $FileHelper->upload([
+                'file' => $request->file('arquivo'),
+                'pasta' => 'ouvidoria/arquivos',
+                'nome' => 'Arquivo Ouvidoria',
+                'observacao' => '',
+                'temporario' => false,
+                'restrito' => true,
+            ]);
+            $nome_arquivo = $infoAnexoImg['status'] ? $infoAnexoImg['nome_arquivo'] : null;
+
+            if (!$infoAnexoImg['status']) return ['status' => false, 'msg' => 'Falha no upload do arquivo.', 'retorno' => $infoAnexoImg];
+        }
+
+        $respostaUsuario = new OuvidoriaMensagem;
+        $respostaUsuario->id_atendimento = $dadosForm['id_atendimento'];
+        $respostaUsuario->autor = $dadosForm['autor'];
+        $respostaUsuario->mensagem = $dadosForm['atendimentoUsuario'];
+        $respostaUsuario->arquivo = $nome_arquivo;
+        $respostaUsuario->save();
+
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Solicitação cadastrada com sucesso!',
+            'dados' => $dadosForm
+        ]);
+    }
+
+    public function atendimento(Request $request)
+    {
+        $dadosForm = $request->all();
+
+        $ultimoAtendimento = OuvidoriaAtendimento::where('ano', date('Y'))->orderBy('id', 'desc')->first();
+        $numero = $ultimoAtendimento ? $ultimoAtendimento->numero + 1 : 1;
+        $codigo = preg_replace('/(\d{4})(\d{3})(\d{3})/', '$1.$2.$3', substr(str_pad(time(), 10, '0', STR_PAD_LEFT), -10));
+
+
+        $atendimento = new OuvidoriaAtendimento;
+        $atendimento->assunto = $dadosForm['assunto'];
+        $atendimento->tipo = $dadosForm['tipo'];
+        $atendimento->situacao = 'Novo';
+        $atendimento->ano = date('Y');
+        $atendimento->numero = $numero;
+        $atendimento->status = 'Aguardando resposta da Câmara';
+        $atendimento->codigo = $codigo;
+        $atendimento->prioridade = $dadosForm['prioridade'];
+
+        if ($dadosForm['sigilo'] === 'semSigilo') {
+            $atendimento->sigiloso = 0;
+        } else {
+            $atendimento->sigiloso = 1;
+        }
+
+        $atendimento->id_usuario = '1';
+        $atendimento->save();
+
+        return response()->json([
+            'status' => false,
+            'msg' => 'TESTE',
+            'dados' => $dadosForm
+        ]);
+    }
+
+    public function deleteMsg(Request $request)
+    {
+        $dadosForm = $request->all();
+        $mensagem = OuvidoriaMensagem::find($dadosForm['id']);
+
+
+
+        if ($mensagem) {
+            $mensagem->delete();
+
+            return response()->json([
+                'status' => true,
+                'msg' => 'Mensagem deletada',
+                'dados' => $dadosForm
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'msg' => 'Mensagem não encontrada!',
+            ]);
+        }
+    }
+
+    public function inputAdmin(Request $request)
+    {
+
+        $dadosForm = $request->all();
+
+        $atendimento = OuvidoriaAtendimento::where('id', 2)->first();
+        $atendimento->situacao = $dadosForm['situacao'];
+        if ($dadosForm['resposta'] == 'usuario') {
+            $atendimento->status = 'Aguardando resposta do Usuário';
+        } else {
+            $atendimento->status = 'Aguardando resposta da Câmara';
+        }
+        $atendimento->save();
+
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Valor trocado',
+            'dados' => $dadosForm
         ]);
     }
 }
