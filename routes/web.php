@@ -33,5 +33,6 @@ Route::get('/ouvidoria/atendimentos', [IndexController::class, 'atendimentos'])-
 
 // CADASTRAR NOVA SOLICITAÇÃO
 Route::get('/ouvidoria', function () {
+    if (session('usuario')) return redirect(route('usuario-atendimentos'));
     return view('ouvidoria');
-});
+})->name('usuario-ouvidoria');

@@ -1,6 +1,8 @@
 function openModal() {
     const email = $("#emailCadastro").val();
 
+    $('#email').val(email);
+
     //document.getElementById('email').value = email;
 
     if (email == "") {
@@ -14,7 +16,6 @@ function openModal() {
 function closeModal() {
     $("#modal").each((index, el) => $(el).hide());
     $(".home").show();
-    //$("#modal").hide();
 }
 
 $(function () {
@@ -50,28 +51,44 @@ $(function () {
     });
 
 
-    // $('[name="prioridade"]').on('change', function () {
-    //     // teste
-    // });
-
 });
 
 function login() {
+
     const email = $("#emailLogin").val();
     const senha = $("#password").val();
     if (email === "" || senha === "") {
         alert("Preencha um email e senha válidos!");
     } else {
-        $(".home").each((index, el) => $(el).hide());
-        $("#modal").each((index, el) => $(el).hide());
 
+        let dadosLogin = {
+            email: email,
+            senha: senha,
+            metodo: 'login',
+        }
+
+        $.ajax({
+            url: '/api/OuvidoriaLogin',
+            type: "POST",
+            dataType: "json",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            data: dadosLogin,
+            success: function (resposta) {
+                console.log(resposta);
+                if (resposta.status) {
+                    alert(resposta.msg);
+                } else {
+                    alert(resposta.msg);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest, textStatus, errorThrown);
+                alert('teste2' + error);
+            }
+        });
         // SE LOGIN E SENHA FOR OK
-        location.replace("/ouvidoria/consulta");
+        location.replace("/ouvidoria/atendimentos");
     }
-}
-
-function inicio() {
-    location.replace("/ouvidoria");
 }
 
 function efetuarCadastro() {
@@ -96,11 +113,25 @@ function efetuarCadastro() {
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste' + error);
+            alert('teste1' + error);
         }
     });
 
+    location.replace("/ouvidoria/atendimentos");
 }
+
+function novaSenha() {
+    document.getElementById('email-formulario').style.display = 'none';
+    document.getElementById('nova-senha').style.display = 'block';
+    document.getElementById('novo-cadastro').style.display = 'none';
+}
+
+function entrar() {
+    document.getElementById('email-formulario').style.display = 'block';
+    document.getElementById('novo-cadastro').style.display = 'block';
+    document.getElementById('nova-senha').style.display = 'none';
+}
+
 $(() => $('form').submit(function (e) {
     efetuarCadastro();
     e.preventDefault();

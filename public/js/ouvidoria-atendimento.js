@@ -21,13 +21,36 @@ function respostaUsuario() {
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste' + error);
+            alert('teste4' + error);
         }
     });
 }
 
-function inicio() {
-    alert('teste')
+function sair() {
+    $.ajax({
+        url: '/api/OuvidoriaLogin',
+        type: "POST",
+        dataType: "json",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data: {
+            metodo: 'sair',
+        },
+        success: function (resposta) {
+            console.log(resposta);
+            if (resposta.status) {
+                alert(resposta.msg);
+            } else {
+                alert(resposta.msg);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest, textStatus, errorThrown);
+            alert('teste2' + error);
+        }
+
+    });
+
+    location.replace("/ouvidoria");
 }
 
 $(() => $('form').submit(function (e) {

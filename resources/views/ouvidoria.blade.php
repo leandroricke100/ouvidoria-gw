@@ -25,7 +25,6 @@
 
 <body>
 
-
     <div class="home">
         <span><strong>&#8226; Denúncia:</strong></span>
         <p>Comunicação de prática de irregularidade ou ato ilícito cuja solução dependa da atuação dos órgãos
@@ -56,7 +55,8 @@
     </div>
 
     <div class="home container">
-        <div id="email-formulario">
+
+        <div id="nova-senha" class="nova-senha" style="display: none">
             <div class="title-email">Informe seu e-mail para cadastrar uma solicitação</div>
 
             <div class="container-itens">
@@ -65,12 +65,13 @@
                     <i class="fas fa-envelope"></i>
                     <input type="email" id="emailCadastro" placeholder="teste@teste.com" required />
                 </div>
-                <button onclick="openModal()">CADASTRAR <i class="fas fa-arrow-right"
+                <button id="esqueceu-senha" onclick="entrar()">Já possui conta? Entrar</button>
+                <button onclick="openModal()">RECUPERAR SENHA<i class="fas fa-arrow-right"
                         style="margin-left: 7px"></i></button>
             </div>
         </div>
 
-        <div id="email-formulario">
+        <div id="email-formulario" style="display: block">
             <div class="title-email"><i class="fas fa-sign-in" style="margin-right: 10px"></i>Login</div>
             <div class="container-itens">
                 <label for="email">E-mail</label>
@@ -84,9 +85,26 @@
                     <i class="fas fa-lock-alt"></i>
                     <input type="password" id="password" placeholder="*******" required />
                 </div>
+                <button id="esqueceu-senha" onclick="novaSenha()">Esqueceu a senha?</button>
                 <button onclick="login()">ACESSAR <i class="fas fa-arrow-right" style="margin-left: 7px"></i></button>
             </div>
         </div>
+
+        <div id="novo-cadastro" style="display: block">
+            <div class="title-email">Informe seu e-mail para cadastrar uma solicitação</div>
+
+            <div class="container-itens">
+                <label for="email">E-mail</label>
+                <div class="container-icons">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="emailCadastro" placeholder="teste@teste.com" required />
+                </div>
+                <button onclick="openModal()">CADASTRAR <i class="fas fa-arrow-right"
+                        style="margin-left: 7px"></i></button>
+            </div>
+        </div>
+
+
     </div>
 
 
@@ -168,8 +186,8 @@
 
                     <div class="field">
                         <label for="email">E-mail <span class="campo-obrigatorio">*</span></label>
-                        <input type="text" id="email" name="email" placeholder="Digite seu e-email"
-                            required>
+                        <input type="text" id="email" name="email" value=''
+                            placeholder="Digite seu e-email" required>
                     </div>
 
                     <div class="field">

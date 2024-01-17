@@ -21,7 +21,7 @@ function respostaAdmin() {
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste' + error);
+            alert('teste8' + error);
         }
     });
 
@@ -52,7 +52,7 @@ function deleteMsg(id) {
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste' + error);
+            alert('teste7' + error);
         }
     });
 
@@ -97,7 +97,7 @@ function updateInput() {
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste');
+            alert('teste6');
         }
     });
 

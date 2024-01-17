@@ -7,6 +7,8 @@ use App\Models\OuvidoriaAtendimento;
 use App\Models\OuvidoriaMensagem;
 use App\Models\OuvidoriaUsuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class OuvidoriaController extends Controller
 {
@@ -51,8 +53,7 @@ class OuvidoriaController extends Controller
 
         $user->complemento = $dadosForm['complemento'];
         $user->cep = intval($dadosForm['cep']);
-        $user->senha = $dadosForm['senha'];
-        $user->confirmar_senha = $dadosForm['confirmarSenha'];
+        $user->senha = Hash::make($dadosForm['senha']);
         $user->data_nascimento = $dadosForm['dataNascimento'];
         $user->celular = $dadosForm['celular'];
         $user->telefone = $dadosForm['telefone'];
@@ -172,6 +173,8 @@ class OuvidoriaController extends Controller
     {
         $dadosForm = $request->all();
 
+        if (!session('usuario')) return ['status' => false, 'msg' => 'Usuário desconectado!'];
+
         $ultimoAtendimento = OuvidoriaAtendimento::where('ano', date('Y'))->orderBy('id', 'desc')->first();
         $numero = $ultimoAtendimento ? $ultimoAtendimento->numero + 1 : 1;
         $codigo = preg_replace('/(\d{4})(\d{3})(\d{3})/', '$1.$2.$3', substr(str_pad(time(), 10, '0', STR_PAD_LEFT), -10));
@@ -207,7 +210,7 @@ class OuvidoriaController extends Controller
         $atendimento->status = 'Aguardando resposta da Câmara';
         $atendimento->codigo = $codigo;
         $atendimento->prioridade = $dadosForm['prioridade'];
-        $atendimento->id_usuario = '1';
+        $atendimento->id_usuario = session('usuario')->id;
         $atendimento->save();
 
         $mensagem = new OuvidoriaMensagem;
@@ -218,10 +221,9 @@ class OuvidoriaController extends Controller
         $mensagem->autor = 'usuario';
         $mensagem->save();
 
-
         return response()->json([
             'status' => false,
-            'msg' => 'TESTE',
+            'msg' => 'TESTEbla',
             'dados' => $dadosForm
         ]);
     }
@@ -269,5 +271,41 @@ class OuvidoriaController extends Controller
             'msg' => 'Valor trocado',
             'dados' => $dadosForm
         ]);
+    }
+
+
+    public function login(Request $request)
+    {
+        $dados = $request->all();
+        $metodo = $dados['metodo'];
+
+        if ($metodo == 'login') {
+            $user = OuvidoriaUsuario::where('email', $dados['email'])->get()->first();
+
+
+            if (!$user) return response()->json(['status' => false, 'msg' => 'Não existe conta com este endereço de email']);
+
+            if (!Hash::check($dados['senha'], $user->senha)) return response()->json(['status' => false, 'msg' => 'Senha incorreta!']);
+
+            // LOGAR USUÁRIO -> DEFININDO SESSION
+            session([
+                'usuario' => $user
+            ]);
+
+
+            return response()->json([
+                'status' => true,
+                'msg' => 'logado',
+                'dados' => $dados
+            ]);
+        } else if ($metodo == 'sair') {
+            // DESLOGAR
+            session()->invalidate();
+
+            return response()->json([
+                'status' => true,
+                'msg' => 'Deslogado'
+            ]);
+        }
     }
 }

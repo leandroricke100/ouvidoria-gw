@@ -47,9 +47,19 @@ body {
 .container {
     display: flex;
     gap: 20px;
+    align-items: center;
+    justify-content: center;
 }
 
 #email-formulario {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#novo-cadastro {
     border: 1px solid #ddd;
     border-radius: 5px;
     display: flex;
@@ -261,6 +271,8 @@ select#prioridade {
     margin-bottom: 10px;
 }
 
+
+
 .cad {
     display: flex;
     justify-content: space-between;
@@ -306,6 +318,15 @@ input:focus {
     border-color: #2c7bff;
 }
 
+#nova-senha {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 467px;
+}
+
 @media screen and (max-width: 768px) {
     .container {
         display: flex;
@@ -343,6 +364,10 @@ input:focus {
     .sigilo {
         height: 65px;
     }
+
+    #nova-senha {
+        width: 100%;
+    }
 }
 
 p.msg-senha {
@@ -354,4 +379,10 @@ p.msg-senha {
 
 textarea#mensagem {
     padding: 10px;
+}
+
+#esqueceu-senha {
+    margin-bottom: 3px;
+    background-color: transparent;
+    color: blue;
 }

@@ -11,3 +11,4 @@ Route::post('/OuvidoriaMensagemUser', [OuvidoriaController::class, 'mensagemUsua
 Route::post('/OuvidoriaDeleteMensagem', [OuvidoriaController::class, 'deleteMsg']);
 Route::post('/OuvidoriaInputAdmin', [OuvidoriaController::class, 'inputAdmin']);
 Route::post('/OuvidoriaAtendimento', [OuvidoriaController::class, 'atendimento']);
+Route::post('/OuvidoriaLogin', [OuvidoriaController::class, 'login']);

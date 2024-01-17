@@ -37,7 +37,7 @@
                         {{ substr($user->email, 0, 3) . '***@***' . substr($user->email, -2) }}
                     @endif
                 </span>
-                <button class="button-sair" onclick="inicio()">Sair</button>
+                <button class="button-sair" onclick="sair()">Sair</button>
             </div>
         </div>
         <div class="ticket">

@@ -11,19 +11,19 @@ use Illuminate\Http\Request;
 class IndexController extends Controller
 {
 
-    public function home(Request $request, $dados = [])
+    public function home(Request $request)
     {
     }
 
     public function atendimento(Request $request, $id)
     {
+        if (!session('usuario')) return redirect(route('usuario-ouvidoria'));
+
         $atendimento = OuvidoriaAtendimento::find($id);
         $mensagens = OuvidoriaMensagem::where('id_atendimento', $id)->orderBy('id')->get()->all();
-        $user = OuvidoriaUsuario::find(1);
-
+        $user = session('usuario');
 
         if (!$atendimento) return view('404', ['msg' => 'Página não encontrada!']);
-
 
         return view('ouvidoria-atendimento', [
             'atendimento' => $atendimento,
@@ -34,17 +34,16 @@ class IndexController extends Controller
 
     public function atendimentos(Request $request)
     {
+        if (!session('usuario')) return redirect(route('usuario-ouvidoria'));
 
-        $atendimentos = OuvidoriaAtendimento::where('id_usuario', 1)->get()->all();
-        $user = OuvidoriaUsuario::find(1);
-
+        $atendimentos = OuvidoriaAtendimento::where('id_usuario', session('usuario')->id)->get()->all();
 
         if (!$atendimentos) return view('404', ['msg' => 'Página não encontrada!']);
 
 
         return view('ouvidoria-atendimentos', [
             'atendimentos' => $atendimentos,
-            'user' => $user,
+            'usuario' => session('usuario'),
         ]);
     }
 
@@ -53,7 +52,7 @@ class IndexController extends Controller
 
         $atendimento = OuvidoriaAtendimento::find($id);
         $mensagens = OuvidoriaMensagem::where('id_atendimento', $id)->orderBy('id')->get()->all();
-        $user = OuvidoriaUsuario::find($id);
+        $user = OuvidoriaUsuario::session('usuario')->id;
 
 
         if (!$atendimento) return view('404', ['msg' => 'Página não encontrada!']);

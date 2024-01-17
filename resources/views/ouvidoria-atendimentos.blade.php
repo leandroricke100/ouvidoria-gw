@@ -20,13 +20,13 @@
 
             <div class="logado">
                 <span><strong>Logado:</strong>
-                    @if ($user->cpf)
-                        {{ substr($user->cpf, 0, 3) . '******' . substr($user->cpf, -2) }}
+                    @if ($usuario)
+                        {{ substr($usuario->cpf, 0, 3) . '******' . substr($usuario->cpf, -2) }}
                     @else
-                        {{ substr($user->email, 0, 3) . '***@***' . substr($user->email, -2) }}
+                        {{ substr($usuario->email, 0, 3) . '***@***' . substr($usuario->email, -2) }}
                     @endif
                 </span>
-                <button class="button-sair" onclick="inicio()">Sair</button>
+                <button class="button-sair" onclick="sair()">Sair</button>
             </div>
         </div>
         <div class="ticket">
