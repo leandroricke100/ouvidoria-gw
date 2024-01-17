@@ -1,5 +1,6 @@
 @inject('Helper', '\App\Helper\Helper')
 
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -61,6 +62,8 @@
                 @endif
 
                 <p>Finalidade: <strong>{{ $atendimento->tipo }}</strong></p>
+
+                <span>Priopidade: {{ $atendimento->prioridade }}</span>
 
                 <p>Em: {{ date('d/m/Y', strtotime($atendimento->created_at)) }}</p>
             </div>

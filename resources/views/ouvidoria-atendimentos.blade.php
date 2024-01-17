@@ -43,13 +43,22 @@
                 @foreach ($atendimentos as $atendimento)
                     <div class="info">
                         <div class="title">
-                            <h1>{{ $atendimento->assunto }}</h1>
+                            <h1>
+                                <div
+                                    class="seu-container {{ $atendimento->situacao == 'Novo' ? 'background-novo' : ($atendimento->situacao == 'Finalizado' ? 'background-finalizado' : 'background-andamento') }}">
+                                    {{ $atendimento->situacao }}
+                                </div>
+                                {{ $atendimento->assunto }}
+                            </h1>
                             <strong>
                                 <p>Em: {{ date('d/m/Y', strtotime($atendimento->created_at)) }}</p>
                             </strong>
                         </div>
                         <div class="btn">
-                            <span><strong>Tipo: </strong>{{ $atendimento->tipo }}</span>
+                            <div class="container-span">
+                                <span><strong>Tipo: </strong>{{ $atendimento->tipo }}</span>
+                            </div>
+
                             <span><strong>Status: </strong>{{ $atendimento->status }}</span>
                             <a class="btn-visualizar"
                                 href="{{ route('usuario-atendimento', ['id' => $atendimento->id]) }}">Visualizar</a>

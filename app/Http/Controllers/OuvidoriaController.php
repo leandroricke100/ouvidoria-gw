@@ -176,8 +176,29 @@ class OuvidoriaController extends Controller
         $numero = $ultimoAtendimento ? $ultimoAtendimento->numero + 1 : 1;
         $codigo = preg_replace('/(\d{4})(\d{3})(\d{3})/', '$1.$2.$3', substr(str_pad(time(), 10, '0', STR_PAD_LEFT), -10));
 
+        $nome_arquivo = null;
+        if ($request->file('arquivo')) {
+            $FileHelper = new FileHelper;
+            $infoAnexoImg = $FileHelper->upload([
+                'file' => $request->file('arquivo'),
+                'pasta' => 'ouvidoria/arquivos',
+                'nome' => 'Arquivo Ouvidoria',
+                'observacao' => '',
+                'temporario' => false,
+                'restrito' => true,
+            ]);
+            $nome_arquivo = $infoAnexoImg['status'] ? $infoAnexoImg['nome_arquivo'] : null;
+
+            if (!$infoAnexoImg['status']) return ['status' => false, 'msg' => 'Falha no upload do arquivo.', 'retorno' => $infoAnexoImg];
+        }
+
 
         $atendimento = new OuvidoriaAtendimento;
+        if ($dadosForm['sigilo'] === 'semSigilo') {
+            $atendimento->sigiloso = 0;
+        } else {
+            $atendimento->sigiloso = 1;
+        }
         $atendimento->assunto = $dadosForm['assunto'];
         $atendimento->tipo = $dadosForm['tipo'];
         $atendimento->situacao = 'Novo';
@@ -186,15 +207,17 @@ class OuvidoriaController extends Controller
         $atendimento->status = 'Aguardando resposta da Câmara';
         $atendimento->codigo = $codigo;
         $atendimento->prioridade = $dadosForm['prioridade'];
-
-        if ($dadosForm['sigilo'] === 'semSigilo') {
-            $atendimento->sigiloso = 0;
-        } else {
-            $atendimento->sigiloso = 1;
-        }
-
         $atendimento->id_usuario = '1';
         $atendimento->save();
+
+        $mensagem = new OuvidoriaMensagem;
+
+        $mensagem->mensagem = $dadosForm['atendimento'];
+        $mensagem->id_atendimento = $atendimento->id;
+        $mensagem->arquivo = $nome_arquivo;
+        $mensagem->autor = 'usuario';
+        $mensagem->save();
+
 
         return response()->json([
             'status' => false,

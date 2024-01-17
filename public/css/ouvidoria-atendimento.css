@@ -45,7 +45,10 @@ body {
         color: #fff;
     }
 
-    gap: 10px;
+    ;
+    gap: 5px;
+    border-radius: -20px;
+    border-radius: 5;
 }
 
 .info {

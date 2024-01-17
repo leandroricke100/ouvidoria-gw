@@ -31,10 +31,10 @@
                 <div>
                     <label for="situacao"><strong>Situação atual: </strong></label>
                     <select id="situacao" name="situacao">
-                        <option value="novo" {{ $atendimento->situacao == 'novo' ? 'selected' : '' }}>Novo</option>
-                        <option value="andamento" {{ $atendimento->situacao == 'andamento' ? 'selected' : '' }}>
+                        <option value="Novo" {{ $atendimento->situacao == 'novo' ? 'selected' : '' }}>Novo</option>
+                        <option value="Andamento" {{ $atendimento->situacao == 'andamento' ? 'selected' : '' }}>
                             Andamento</option>
-                        <option value="finalizado" {{ $atendimento->situacao == 'finalizado' ? 'selected' : '' }}>
+                        <option value="Finalizado" {{ $atendimento->situacao == 'finalizado' ? 'selected' : '' }}>
                             Finalizado</option>
                     </select>
                 </div>
@@ -61,6 +61,8 @@
                 @endif
 
                 <p>Finalidade: <strong>{{ $atendimento->tipo }}</strong></p>
+
+                <span>Priopidade: {{ $atendimento->prioridade }}</span>
 
                 <p>Em: {{ date('d/m/Y', strtotime($atendimento->created_at)) }}</p>
             </div>

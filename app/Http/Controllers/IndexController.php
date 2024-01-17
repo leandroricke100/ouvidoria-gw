@@ -19,7 +19,7 @@ class IndexController extends Controller
     {
         $atendimento = OuvidoriaAtendimento::find($id);
         $mensagens = OuvidoriaMensagem::where('id_atendimento', $id)->orderBy('id')->get()->all();
-        $user = OuvidoriaUsuario::find($id);
+        $user = OuvidoriaUsuario::find(1);
 
 
         if (!$atendimento) return view('404', ['msg' => 'Página não encontrada!']);

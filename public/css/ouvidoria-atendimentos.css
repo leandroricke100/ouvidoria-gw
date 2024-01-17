@@ -16,10 +16,6 @@ body {
 }
 
 .container {
-    /**/
-    /* border: 1px solid #ddd; */
-    /* background-color: #2c7bff; */
-    /* border-radius: 5px; */
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -249,7 +245,23 @@ input#assunto {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    span {
+        background-color: #0000001f;
+        padding: 5px 10px;
+        border-radius: 6px;
+        color: black;
+    }
 }
+
+@media screen and (max-width: 768px) {
+    .btn {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 11px;
+    }
+}
+
 
 select#tipo {
     padding: 6px;
@@ -297,4 +309,42 @@ select#sigilo {
     outline: none;
     margin-bottom: 15px;
     flex: 1;
+}
+
+.container-span {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    span {
+        background-color: #0000001f;
+        padding: 5px 10px;
+        border-radius: 6px;
+        color: black;
+    }
+}
+
+.seu-container {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 13px;
+    vertical-align: middle;
+    display: inline-block;
+    color: #fff;
+    margin-right: 5px;
+}
+
+.background-novo {
+    background: #0bab38;
+
+}
+
+.background-finalizado {
+    background: #2323237d;
+}
+
+.background-andamento {
+    background: #2c7bff;
+
 }
