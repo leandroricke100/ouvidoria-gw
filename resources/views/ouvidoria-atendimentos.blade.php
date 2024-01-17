@@ -77,25 +77,25 @@
             <div class="container-inputs">
                 <label for="tipo">Tipo: </label>
                 <select id="tipo" name="tipo">
-                    <option value="elogio">Elogio</option>
-                    <option value="denuncia">Denúncia</option>
-                    <option value="reclamacao">Reclamação</option>
-                    <option value="sugestao">Sugestão</option>
-                    <option value="simplificada">Simplificada</option>
+                    <option value="Elogio">Elogio</option>
+                    <option value="Denuncia">Denúncia</option>
+                    <option value="Reclamacao">Reclamação</option>
+                    <option value="Sugestao">Sugestão</option>
+                    <option value="Simplificada">Simplificada</option>
                 </select>
 
                 <label for="prioridade">Prioridade: </label>
                 <select id="prioridade" name="prioridade">
-                    <option value="baixa">Baixa</option>
-                    <option value="media">Média</option>
-                    <option value="alta">Alta</option>
-                    <option value="urgente">Urgente</option>
+                    <option value="Baixa">Baixa</option>
+                    <option value="Media">Média</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Urgente">Urgente</option>
                 </select>
 
                 <label for="sigilo">Sigilo: </label>
                 <select id="sigilo" name="sigilo">
-                    <option value="semSigilo">Sem sigilo</option>
-                    <option value="sigiloso">Sigiloso</option>
+                    <option value="SemSigilo">Sem sigilo</option>
+                    <option value="Sigiloso">Sigiloso</option>
                 </select>
             </div>
 

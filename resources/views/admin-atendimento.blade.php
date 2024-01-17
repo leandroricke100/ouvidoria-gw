@@ -62,7 +62,7 @@
 
                 <p>Finalidade: <strong>{{ $atendimento->tipo }}</strong></p>
 
-                <span>Priopidade: {{ $atendimento->prioridade }}</span>
+                <p>Prioridade: {{ $atendimento->prioridade }}</p>
 
                 <p>Em: {{ date('d/m/Y', strtotime($atendimento->created_at)) }}</p>
             </div>

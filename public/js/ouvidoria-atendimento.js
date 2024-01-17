@@ -26,6 +26,10 @@ function respostaUsuario() {
     });
 }
 
+function inicio() {
+    alert('teste')
+}
+
 $(() => $('form').submit(function (e) {
     respostaUsuario();
     e.preventDefault();

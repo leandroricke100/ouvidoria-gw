@@ -46,7 +46,7 @@ body {
     }
 
     ;
-    gap: 5px;
+    gap: 8px;
     border-radius: -20px;
     border-radius: 5;
 }
@@ -140,7 +140,7 @@ p {
     }
 }
 
-button.button-voltar {
+a.button-voltar {
     color: #fff;
     border-radius: 10px;
     padding: 10px 17px;

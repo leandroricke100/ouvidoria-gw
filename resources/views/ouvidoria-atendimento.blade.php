@@ -24,7 +24,7 @@
     <div id="atendimento" class="atendimento">
         <div class="logout-top">
             <div class="voltar-top">
-                <button class="button-voltar" onclick="inicio()">Voltar</button>
+                <a class="button-voltar" href="javascript:history.back()">Voltar</a>
             </div>
 
             <div class="logado">
@@ -61,9 +61,9 @@
                     <span>sigiloso</span>
                 @endif
 
-                <p>Finalidade: <strong>{{ $atendimento->tipo }}</strong></p>
+                <p>Finalidade: {{ $atendimento->tipo }}</p>
 
-                <span>Priopidade: {{ $atendimento->prioridade }}</span>
+                <p>Prioridade: {{ $atendimento->prioridade }}</p>
 
                 <p>Em: {{ date('d/m/Y', strtotime($atendimento->created_at)) }}</p>
             </div>
