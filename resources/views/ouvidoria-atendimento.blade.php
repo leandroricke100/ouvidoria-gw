@@ -98,6 +98,7 @@
                                 Você
                             </h1>
                         @endif
+                        <div class="horario"><strong>{{ $mensagem->created_at->format('d/m/Y H:i:s') }}</strong></div>
 
                     </div>
 

@@ -61,6 +61,12 @@ body {
 .title {
     border-bottom: 1px solid #ddd;
     margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+
+    strong {
+        color: #7a7a7a;
+    }
 }
 
 p {
@@ -261,4 +267,8 @@ h1.assunto {
     content: "\f56c";
     color: black;
     margin-left: 4px;
+}
+
+.hoario {
+    color: #7a7a7a;
 }

@@ -110,6 +110,7 @@ function efetuarCadastro() {
             console.log(resposta);
             if (resposta.status) {
                 alert(resposta.msg);
+                location.reload();
             } else {
                 alert(resposta.msg);
             }
@@ -164,17 +165,6 @@ function recuperarSenha() {
                 $('#email-formulario').hide();
                 $('#recuperar-senha').hide();
                 $('#div-nova-senha').show();
-
-                // $('#confirmar-senha').change(function () {
-                //     let conf_senha = $(this).val();
-                //     let senha = $('#nova-senha').val();
-
-                //     if (senha != conf_senha) {
-                //         $('.msg-senha').show();
-                //     } else {
-                //         $('.msg-senha').hide();
-                //     }
-                // });
 
             } else {
                 alert(resposta.msg);

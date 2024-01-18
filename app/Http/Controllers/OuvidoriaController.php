@@ -92,6 +92,10 @@ class OuvidoriaController extends Controller
         $mensagem->autor = 'usuario';
         $mensagem->save();
 
+        session([
+            'usuario' => $user
+        ]);
+
         return response()->json([
             'status' => true,
             'msg' => 'Solicitação cadastrada com sucesso!',
