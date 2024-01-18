@@ -26,4 +26,4 @@ jobs:
           username: ${{ secrets.ftp_user }}
           password: ${{ secrets.ftp_password }}
           port: ${{ secrets.ftp_port }}
-          script: 'cd /home/gwouvidoria/ouvidoria/gwouvidoria.com.br && composer update && php artisan migrate --force && php artisan optimize:clear && php artisan route:cache'
+          script: 'cd /home/gwouvidoria/public_html && composer update && php artisan migrate --force && php artisan optimize:clear && php artisan route:cache'
