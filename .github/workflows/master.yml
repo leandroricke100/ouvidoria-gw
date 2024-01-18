@@ -17,7 +17,7 @@ jobs:
           server: ${{ secrets.ftp_host }}
           username: ${{ secrets.ftp_user }}
           password: ${{ secrets.ftp_password }}
-          server-dir: ouvidoria/gwouvidoria.com.br/
+          server-dir: public_html/
 
       - name: ▶️ Executando Scripts
         uses: appleboy/ssh-action@master
