@@ -65,7 +65,7 @@
 
                 <p>Prioridade: {{ $atendimento->prioridade }}</p>
 
-                <p>Em: {{ date('d/m/Y', strtotime($atendimento->created_at)) }}</p>
+                <p>Em: {{ $atendimento->created_at->format('d/m/Y H:i') }}</p>
             </div>
             <div class="info">
                 <div class="title user">
