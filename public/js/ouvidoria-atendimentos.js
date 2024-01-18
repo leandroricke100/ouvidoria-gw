@@ -13,15 +13,15 @@ function novoAtendimento() {
         success: function (resposta) {
             console.log(resposta);
             if (resposta.status) {
-                alert(resposta.msg);
+
                 location.reload();
             } else {
-                alert(resposta.msg);
+
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste3' + error);
+
         }
     });
 }
@@ -44,14 +44,14 @@ function sair() {
         success: function (resposta) {
             console.log(resposta);
             if (resposta.status) {
-                alert(resposta.msg);
+
             } else {
-                alert(resposta.msg);
+
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste2' + error);
+
         }
 
     });

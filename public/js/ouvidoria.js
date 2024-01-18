@@ -61,7 +61,7 @@ function login() {
     const email = $("#emailLogin").val();
     const senha = $("#password").val();
     if (email === "" || senha === "") {
-        alert("Preencha um email e senha válidos!");
+
     } else {
 
         let dadosLogin = {
@@ -79,14 +79,14 @@ function login() {
             success: function (resposta) {
                 console.log(resposta);
                 if (resposta.status) {
-                    alert(resposta.msg);
+
                 } else {
-                    alert(resposta.msg);
+
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log(XMLHttpRequest, textStatus, errorThrown);
-                alert('teste2' + error);
+
             }
         });
         // SE LOGIN E SENHA FOR OK
@@ -109,15 +109,15 @@ function efetuarCadastro() {
         success: function (resposta) {
             console.log(resposta);
             if (resposta.status) {
-                alert(resposta.msg);
+
                 location.reload();
             } else {
-                alert(resposta.msg);
+
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste1' + error);
+
         }
     });
 
@@ -160,19 +160,19 @@ function recuperarSenha() {
         success: function (resposta) {
             console.log(resposta);
             if (resposta.status) {
-                alert(resposta.msg);
+
 
                 $('#email-formulario').hide();
                 $('#recuperar-senha').hide();
                 $('#div-nova-senha').show();
 
             } else {
-                alert(resposta.msg);
+
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste1' + error);
+
         }
     });
 
@@ -202,15 +202,15 @@ function salvarNovaSenha() {
         success: function (resposta) {
             console.log(resposta);
             if (resposta.status) {
-                alert(resposta.msg);
+
                 location.reload();
             } else {
-                alert(resposta.msg);
+
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest, textStatus, errorThrown);
-            alert('teste1' + error);
+
         }
     });
 
