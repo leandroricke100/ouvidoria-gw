@@ -48,26 +48,60 @@
         </p>
         <span><strong>&#8226; Elogio:</strong></span>
         <p>Demonstração de reconhecimento ou satisfação sobre o serviço oferecido ou atendimento recebido.</p>
-        <p>OBS : Comunicação de irregularidade, informações de origem anônima, sem identificação do manifestante, que
-            comunicam irregularidades com indícios mínimos de relevância, autoria e materialidade. As comunicações de
-            irregularidade devem ser enviadas ao órgão ou entidade competente para apuração. Por não serem
-            identificadas, não são passíveis de acompanhamento pelo usuário.</p>
+        <p><i>OBS : Comunicação de irregularidade, informações de origem anônima, sem identificação do manifestante, que
+                comunicam irregularidades com indícios mínimos de relevância, autoria e materialidade. As comunicações
+                de
+                irregularidade devem ser enviadas ao órgão ou entidade competente para apuração. Por não serem
+                identificadas, não são passíveis de acompanhamento pelo usuário.</i></p>
     </div>
 
     <div class="home container">
 
-        <div id="nova-senha" class="nova-senha" style="display: none">
-            <div class="title-email">Informe seu e-mail para cadastrar uma solicitação</div>
+
+        <div id="div-nova-senha" class="nova-senha" style="display: none">
+            <div class="title-email">Informe sua nova senha</div>
+
+            <div class="container-itens">
+                <label for="token">Token</label>
+                <div class="container-icons">
+                    <i class="far fa-key"></i>
+                    <input type="text" id="token" placeholder="Digite o token" required />
+                </div>
+
+                <label for="nova-senha">Nova senha</label>
+                <div class="container-icons">
+                    <i class="fas fa-lock-alt"></i>
+                    <input type="password" id="senha-nova" placeholder="*******" required />
+                </div>
+
+                <p style="display: none" class="confirmar-senha">Senhas não conferem</p>
+
+                <label for="confirmar-senha">Confirmar senha</label>
+                <div class="container-icons">
+                    <i class="fas fa-lock-alt"></i>
+                    <input type="password" id="confirmar-nova-senha" placeholder="*******" required />
+                </div>
+
+                <p style="display: none" class="confirmar-senha">Senhas não conferem</p>
+
+
+                <button onclick="salvarNovaSenha()">SALVAR<i class="fas fa-save" style="margin-left: 7px"></i></button>
+            </div>
+        </div>
+
+        <div id="recuperar-senha" class="recuperar-senha" style="display: none">
+            <div class="title-email">Informe seu e-mail para recuperar a senha</div>
 
             <div class="container-itens">
                 <label for="email">E-mail</label>
                 <div class="container-icons">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="emailCadastro" placeholder="teste@teste.com" required />
+                    <input type="email" id="emailRecuperar" placeholder="teste@teste.com" required />
                 </div>
-                <button id="esqueceu-senha" onclick="entrar()">Já possui conta? Entrar</button>
-                <button onclick="openModal()">RECUPERAR SENHA<i class="fas fa-arrow-right"
+
+                <button onclick="recuperarSenha()">RECUPERAR SENHA<i class="fas fa-arrow-right"
                         style="margin-left: 7px"></i></button>
+                <button id="esqueceu-senha" onclick="entrar()">Já possui conta? Entrar</button>
             </div>
         </div>
 
@@ -87,28 +121,27 @@
                 </div>
                 <button id="esqueceu-senha" onclick="novaSenha()">Esqueceu a senha?</button>
                 <button onclick="login()">ACESSAR <i class="fas fa-arrow-right" style="margin-left: 7px"></i></button>
+                <br>
+                <button id="criar-conta" class="criar-conta" onclick="openModal()">Não tem conta?
+                    <strong>Cadastre-se</strong></button>
             </div>
         </div>
 
-        <div id="novo-cadastro" style="display: block">
+        {{-- <div id="novo-cadastro" style="display: none">
             <div class="title-email">Informe seu e-mail para cadastrar uma solicitação</div>
 
             <div class="container-itens">
                 <label for="email">E-mail</label>
                 <div class="container-icons">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="emailCadastro" placeholder="teste@teste.com" required />
+                    <input type="email" id="emailCadastro" value="" placeholder="teste@teste.com" required />
                 </div>
                 <button onclick="openModal()">CADASTRAR <i class="fas fa-arrow-right"
                         style="margin-left: 7px"></i></button>
             </div>
-        </div>
-
+        </div> --}}
 
     </div>
-
-
-
 
     <div id="modal" class="modal">
         <div class="top">
@@ -121,15 +154,12 @@
         </div>
 
         <section>
-
-
-
             <p>Preencha os campos abaixo para realizar seu cadastro.<br>
-                Eles são importantes para que você possa realizar e acompanhar solicitações junto à Ouvidoria da câmara.
+                Eles são importantes para que você possa realizar e acompanhar solicitações junto à Ouvidoria da
+                câmara.
             </p>
-
-
-            <p class="campo-obrigatorio"><span class="campo-obrigatorio">*</span> Campos de preenchimento obrigatório.
+            <p class="campo-obrigatorio"><span class="campo-obrigatorio">*</span> Campos de preenchimento
+                obrigatório.
             </p>
 
             </p>
@@ -138,7 +168,8 @@
                 </h3>
 
                 <div class="radio">
-                    <input type="radio" id="pessoaFisica" name="tipoCadastro" value="pessoaFisica" checked required>
+                    <input type="radio" id="pessoaFisica" name="tipoCadastro" value="pessoaFisica" checked
+                        required>
                     <label for="pessoaFisica">Pessoa Física</label>
                 </div>
 

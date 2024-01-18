@@ -1,16 +1,8 @@
 function openModal() {
-    const email = $("#emailCadastro").val();
 
-    $('#email').val(email);
+    $(".home").each((index, el) => $(el).hide());
+    $("#modal").show();
 
-    //document.getElementById('email').value = email;
-
-    if (email == "") {
-        alert("Preencha um email");
-    } else {
-        $(".home").each((index, el) => $(el).hide());
-        $("#modal").show();
-    }
 }
 
 function closeModal() {
@@ -47,6 +39,17 @@ $(function () {
             $('.msg-senha').show();
         } else {
             $('.msg-senha').hide();
+        }
+    });
+
+    $('#confirmar-nova-senha').change(function () {
+        let conf_senha = $(this).val();
+        let senha = $('#senha-nova').val();
+
+        if (senha != conf_senha) {
+            $('.confirmar-senha').show();
+        } else {
+            $('.confirmar-senha').hide();
         }
     });
 
@@ -121,15 +124,16 @@ function efetuarCadastro() {
 }
 
 function novaSenha() {
-    document.getElementById('email-formulario').style.display = 'none';
-    document.getElementById('nova-senha').style.display = 'block';
-    document.getElementById('novo-cadastro').style.display = 'none';
+    $('#email-formulario').hide();
+    $('#recuperar-senha').show();
+    $('#div-nova-senha').hide();
 }
 
 function entrar() {
-    document.getElementById('email-formulario').style.display = 'block';
-    document.getElementById('novo-cadastro').style.display = 'block';
-    document.getElementById('nova-senha').style.display = 'none';
+    $('#email-formulario').show();
+    $('#recuperar-senha').hide();
+    $('#nova-senha').hide();
+
 }
 
 $(() => $('form').submit(function (e) {
@@ -137,4 +141,87 @@ $(() => $('form').submit(function (e) {
     e.preventDefault();
 }));
 
+function recuperarSenha() {
+    let email = $("#emailRecuperar").val();
 
+    if (email == "") return alert("Preencha um email");
+
+    emailCadastrado = {
+        email: email,
+    }
+
+    $.ajax({
+        url: '/api/OuvidoriaRecuperarLogin',
+        type: "POST",
+        dataType: "json",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data: emailCadastrado,
+        success: function (resposta) {
+            console.log(resposta);
+            if (resposta.status) {
+                alert(resposta.msg);
+
+                $('#email-formulario').hide();
+                $('#recuperar-senha').hide();
+                $('#div-nova-senha').show();
+
+                // $('#confirmar-senha').change(function () {
+                //     let conf_senha = $(this).val();
+                //     let senha = $('#nova-senha').val();
+
+                //     if (senha != conf_senha) {
+                //         $('.msg-senha').show();
+                //     } else {
+                //         $('.msg-senha').hide();
+                //     }
+                // });
+
+            } else {
+                alert(resposta.msg);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest, textStatus, errorThrown);
+            alert('teste1' + error);
+        }
+    });
+
+}
+
+function salvarNovaSenha() {
+    let email = $("#emailRecuperar").val();
+    let token = $('#token').val();
+    let senha = $('#senha-nova').val();
+    let confirmarSenha = $('#confirmar-nova-senha').val();
+
+    let dadosSenha = {
+        email: email,
+        token: token,
+        senha: senha,
+        confirmarSenha: confirmarSenha,
+    }
+
+
+
+    $.ajax({
+        url: '/api/OuvidoriaRecuperarSenha',
+        type: "POST",
+        dataType: "json",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        data: dadosSenha,
+        success: function (resposta) {
+            console.log(resposta);
+            if (resposta.status) {
+                alert(resposta.msg);
+                location.reload();
+            } else {
+                alert(resposta.msg);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest, textStatus, errorThrown);
+            alert('teste1' + error);
+        }
+    });
+
+}

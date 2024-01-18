@@ -308,4 +308,50 @@ class OuvidoriaController extends Controller
             ]);
         }
     }
+
+    public function recuperarLogin(Request $request)
+    {
+        $dados = $request->all();
+
+        $user = OuvidoriaUsuario::where('email', $dados['email'])->get()->first();
+
+
+
+        if (!$user) {
+            return response()->json(['status' => false, 'msg' => 'Não existe conta com este endereço de email']);
+        } else {
+            $token = rand(1000, 9999);
+            mail($dados['email'], 'Recuperação de Senha', 'Seu token para alterar sua senha é:<br>' . $token);
+
+            $user->token_senha = $token;
+            $user->save();
+
+            return response()->json([
+                'status' => true,
+                'msg' => 'Verifique seu email para obter o código de alteração da sua senha.',
+                'dados' => $dados
+            ]);
+        }
+    }
+
+    public function recuperarSenha(Request $request)
+    {
+        $dados = $request->all();
+
+        $user = OuvidoriaUsuario::where('email', $dados['email'])->get()->first();
+
+        if (!$user || $dados['senha'] != $dados['confirmarSenha'] || $dados['token'] != $user['token_senha'] || !$dados['senha']) {
+            return response()->json(['status' => false, 'msg' => 'Dados inválidos do token ou senha']);
+        } else {
+
+            $user->senha = Hash::make($dados['senha']);
+            $user->save();
+
+            return response()->json([
+                'status' => true,
+                'msg' => 'Nova senha cadastrada.',
+                'dados' => $dados
+            ]);
+        }
+    }
 }
