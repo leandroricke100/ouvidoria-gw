@@ -54,6 +54,20 @@ $(function () {
     });
 
 
+    const menuItems = document.querySelectorAll('.menu-estrutura');
+    const modalSubMenu = document.querySelector('.modalMenu');
+
+    menuItems.forEach(item => {
+        item.addEventListener('mouseover', () => {
+            modalSubMenu.style.display = 'block';
+        });
+
+        item.addEventListener('mouseout', () => {
+            modalSubMenu.style.display = 'none';
+        })
+    })
+
+
 });
 
 function login() {
@@ -214,4 +228,12 @@ function salvarNovaSenha() {
         }
     });
 
+}
+
+function openMenuModal() {
+    $("#menu-modal-mobile").show();
+}
+
+function closeMenuModal() {
+    $('#menu-modal-mobile').hide();
 }
