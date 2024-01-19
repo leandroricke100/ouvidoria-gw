@@ -13,6 +13,7 @@ class IndexController extends Controller
 
     public function home(Request $request)
     {
+        //
     }
 
     public function atendimento(Request $request, $id)

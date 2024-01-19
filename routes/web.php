@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [IndexController::class, 'home']);
+// Route::get('/', [IndexController::class, 'home']);
 Route::get('/arquivo/{id}/{op?}', [IndexArquivo::class, 'index'])->name('pg-arquivo');
 
 
@@ -32,7 +32,7 @@ Route::get('/admin/ouvidoria/atendimento/{id}', [IndexController::class, 'admin'
 Route::get('/ouvidoria/atendimentos', [IndexController::class, 'atendimentos'])->name('usuario-atendimentos');
 
 // CADASTRAR NOVA SOLICITAÇÃO
-Route::get('/ouvidoria', function () {
+Route::get('/', function () {
     if (session('usuario')) return redirect(route('usuario-atendimentos'));
     return view('ouvidoria');
 })->name('usuario-ouvidoria');
