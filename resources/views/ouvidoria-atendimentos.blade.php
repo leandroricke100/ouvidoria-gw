@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+@extends('layout', [
+    'titulo' => 'Ouvidoria Atendimento',
+    'header' => false,
+    'footer' => false,
+])
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ouvidoria - Atendimentos</title>
 
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
+
+@push('head')
     <script src="{{ asset('js/ouvidoria-atendimentos.js') }}"></script>
-
     <link href="{{ asset('css/ouvidoria-atendimentos.css') }}?v={{ time() }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
-</head>
+@endpush
 
-<body>
+@section('conteudo')
+
     <div id="atendimentos" class="atendimentos">
         <div class="logout-top">
 
             <div class="logado">
-                <span><strong>Logado:</strong>
+                <span><strong>Usuário:</strong>
                     @if ($usuario)
                         {{ substr($usuario->cpf, 0, 3) . '******' . substr($usuario->cpf, -2) }}
                     @else
@@ -110,7 +108,5 @@
             <button>ENVIAR</button>
         </form>
     </div>
-</body>
 
-
-</html>
+@endsection

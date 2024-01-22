@@ -26,6 +26,8 @@ Route::get('/arquivo/{id}/{op?}', [IndexArquivo::class, 'index'])->name('pg-arqu
 // CONSULTAR ATENDIMENTO
 Route::get('/ouvidoria/atendimento/{id}', [IndexController::class, 'atendimento'])->name('usuario-atendimento');
 
+Route::get('/ouvidoria/protocolo/{numero}/{data}', [IndexController::class, 'protocolo'])->name('usuario-protocolo');
+
 Route::get('/admin/ouvidoria/atendimento/{id}', [IndexController::class, 'admin'])->name('admin-atendimento');
 
 // CONSULTAR LISTA DE ATENDIMENTOS

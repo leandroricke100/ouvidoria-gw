@@ -1,120 +1,41 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+@extends('layout', [
+    'titulo' => 'Ouvidoria',
+])
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ouvidoria</title>
-
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
+@push('head')
     <script src="{{ asset('js/ouvidoria.js') }}?v={{ time() }}"></script>
-
     <link href="{{ asset('css/ouvidoria.css') }}?v={{ time() }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
+@endpush
 
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-</head>
-
-<body>
-
-    <header class="header-web">
-        <div class="brasao">
-            <img src="https://portalfacilarquivos.blob.core.windows.net/uploads/VICOSA/imgOrig/%7B60DC018A-0135-EE5B-476B-0E350B5C15BB%7D.jpg"
-                alt="logo da prefeitura" />
-            <H1>PREFEITURA DE VIÇOSA -MG</H1>
-        </div>
-        <div class="menu">
-            <ul>
-                <li id="menu-inicio"><button>INÍCIO</button></li>
-                <li id="menu-noticias"><button>NOTÍCIAS</button></li>
-                <li id="menu-estrutura" class="menu-estrutura"><button>ESTRUTURA DO GOVERNO <i class="fas fa-angle-down"
-                            style="margin-left: 5px"></i></button>
-                </li>
-                <li id="menu-servicos"><button>SERVIÇOS</button></li>
-                <li id="menu-transparencia"><button>TRANSPARÊNCIA</button></li>
-            </ul>
-        </div>
-
-        <div class="modalMenu" style="display: none">
-            <ul>
-                <li id="prefeito"><button>PREFEITO</button></li>
-                <li id="secretarias"><button>SECRETARIAS</button></li>
-                <li id="fundacoes"><button>FUNDAÇÕES</button></li>
-                <li id="empresas"><button>EMPRESAS E AUTARQUIAS</button></li>
-                <li id="cordenadorias"><button>CORDENADORIAS DE ATENDIMENT0</button></li>
-            </ul>
-            <div class="modalMenuPrefeito" style="display: none">
-                <div class="modalButton">
-                    <button>PREFEITO</button>
-                    <button>TESTE</button>
-                </div>
-            </div>
-            <div class="modalMenuSecretaria" style="display: none
-            ">
-                <div class="modalButton">
-                    <button>FAZENDA</button>
-                    <button>MEIO AMBIENTE</button>
-                    <button>OBRAS</button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <header class="header-mobile">
-        <div class="brasao">
-            <img
-                src="https://portalfacilarquivos.blob.core.windows.net/uploads/VICOSA/imgOrig/%7B60DC018A-0135-EE5B-476B-0E350B5C15BB%7D.jpg" />
-            <H1>PREFEITURA DE VIÇOSA -MG</H1>
-        </div>
-
-        <div class="menu-oculto">
-            <button class="button-menu" onclick="openMenuModal()"><i class="fas fa-bars"
-                    style="margin-right: 8px"></i>Menu</button>
-        </div>
-
-        <div id="menu-modal-mobile">
-            <div class="div-botao-fechar">
-                <button class="botao-fechar" onclick="closeMenuModal()"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="menu-mobile">
-                <button>INÍCIO</button>
-                <button>NOTÍCIAS</button>
-                <button>ESTRUTURA DE GOVERNO</button>
-                <button>SERVIÇOS</button>
-                <button>TRANSPARÊNCIA</button>
-            </div>
-        </div>
-    </header>
+@section('conteudo')
     <div class="container-principal">
         <div class="menu-lateral">
-            <h1>SUBCONTROLADORIA DE OUVIDORIA</h1>
-
-            <div class="button-lateral-menu">
-                <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>OUVIDORIA</button>
-                <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>QUEM É QUEM</button>
-                <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>PROGRAMAS E PROJETOS</button>
-                <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>SERVIÇOS</button>
-                <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>OUVIDORIA SUS</button>
-                <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>CONTROLADORIA-GERAL DO
-                    MUNICÍPIO</button>
-
-                <h1>INFORMAÇÕES</h1>
+            <div class="menu-left">
+                <h1>SUBCONTROLADORIA DE OUVIDORIA</h1>
 
                 <div class="button-lateral-menu">
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>FALE COM AOUVIDORIA</button>
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>LEGISLAÇÃO</button>
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>RELATÓRIOS</button>
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>MANUAL DE CAPTAÇÃO</button>
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>LEI GERAL DE PROTEÇÃO DE DADOS
-                        PESSOAIS - LGPD</button>
+                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>OUVIDORIA</button>
+                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>QUEM É QUEM</button>
+                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>PROGRAMAS E PROJETOS</button>
+                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>SERVIÇOS</button>
+                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>OUVIDORIA SUS</button>
+                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>CONTROLADORIA-GERAL DO
+                        MUNICÍPIO</button>
+
+                    <h1>INFORMAÇÕES</h1>
+
+                    <div class="button-lateral-menu">
+                        <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>FALE COM AOUVIDORIA</button>
+                        <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>LEGISLAÇÃO</button>
+                        <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>RELATÓRIOS</button>
+                        <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>MANUAL DE CAPTAÇÃO</button>
+                        <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>LEI GERAL DE PROTEÇÃO DE
+                            DADOS
+                            PESSOAIS - LGPD</button>
+
+                    </div>
 
                 </div>
-
             </div>
         </div>
         <div>
@@ -157,34 +78,26 @@
                         identificadas, não são passíveis de acompanhamento pelo usuário.</i></p>
             </div>
 
-            {{-- <div class="menu-lateral">
-                <h1>SUBCONTROLADORIA DE OUVIDORIA</h1>
-
-                <div class="button-lateral-menu">
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>OUVIDORIA</button>
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>QUEM É QUEM</button>
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>PROGRAMAS E PROJETOS</button>
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>SERVIÇOS</button>
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>OUVIDORIA SUS</button>
-                    <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>CONTROLADORIA-GERAL DO
-                        MUNICÍPIO</button>
-
-                    <h1>INFORMAÇÕES</h1>
-
-                    <div class="button-lateral-menu">
-                        <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>FALE COM AOUVIDORIA</button>
-                        <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>LEGISLAÇÃO</button>
-                        <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>RELATÓRIOS</button>
-                        <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>MANUAL DE
-                            CAPTAÇÃO</button>
-                        <button><i class="fas fa-angle-right" style="margin-right: 5px"></i>LEI GERAL DE PROTEÇÃO DE
-                            DADOS
-                            PESSOAIS - LGPD</button>
-
+            <div id="consulta-protocolo" class="consulta-protocolo">
+                <div class="fundo">
+                    <div class="protocolo-title">
+                        <h1>Consultar com N° do protocolo</h1>
                     </div>
+                    <div class="protocolo-info">
+                        <div class="input-protocolo">
+                            <label for="protocolo">N° PROTOCOLO</label>
+                            <input type="text" id="protocolo" placeholder="0000.000.000" />
+                        </div>
+                        <div class="input-protocolo">
+                            <label for="protocolo">Data protocolo</label>
+                            <input type="date" id="dataProtocolo" />
+                        </div>
 
+                        <button onclick="buscarProtocolo()">VERIFICAR <i class="fas fa-arrow-right"
+                                style="margin-left: 7px"></i></button>
+                    </div>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="home container">
 
@@ -286,7 +199,7 @@
                     </p>
 
                     </p>
-                    <form class="form" id="cad-atendimento">
+                    <form class="form" id="cad-atendimento" onsubmit="return validarSenha()">
                         <h3>Tipo de Cadastro <span class="campo-obrigatorio"><span
                                     class="campo-obrigatorio">*</span></span>
                         </h3>
@@ -350,8 +263,7 @@
 
                             <div class="field">
                                 <label for="telefone">Telefone </label>
-                                <input type="tel" id="telefone" name="telefone"
-                                    placeholder="Digite seu telefone">
+                                <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone">
                             </div>
 
                             <div class="field">
@@ -380,8 +292,7 @@
                             </div>
 
                             <div class="field">
-                                <label for="nacionalidade">Nacionalidade <span
-                                        class="campo-obrigatorio">*</span></label>
+                                <label for="nacionalidade">Nacionalidade <span class="campo-obrigatorio">*</span></label>
                                 <input type="text" id="nacionalidade" name="nacionalidade"
                                     placeholder="Digite sua nacionalidade" required>
                             </div>
@@ -415,8 +326,8 @@
                             <div class="field" style="flex-basis: 200px;">
                                 <label for="endereco">Endereço completo (com número)<span
                                         class="campo-obrigatorio">*</span></label>
-                                <input type="text" id="endereco" name="endereco"
-                                    placeholder="Digite seu endereço" required>
+                                <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço"
+                                    required>
                             </div>
 
                             <div class="field">
@@ -447,8 +358,8 @@
                             <div class="field senha">
                                 <div class="field">
                                     <label for="senha">Senha <span class="campo-obrigatorio">*</span></label>
-                                    <input type="password" id="senha" name="senha"
-                                        placeholder="Digite sua senha" required>
+                                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha"
+                                        required>
                                     <p style="display: none" class="msg-senha">Senhas não conferem</p>
                                 </div>
 
@@ -459,9 +370,11 @@
                                         placeholder="Digite sua senha" required>
                                     <p style="display: none" class="msg-senha">Senhas não conferem</p>
                                 </div>
+
                             </div>
-
-
+                            <div class="info-senha-cad"><span>* As senha devem conter no minímo 8 caracteres com
+                                    maiúscula e caractere
+                                    especial</span></div>
 
                             <div class="field">
                                 <label for="tipo">Tipo</label>
@@ -518,14 +431,7 @@
             </div>
         </div>
     </div>
+@endsection
 
-    <footer class="footer">
-        <div class="brasao">
-            <img src="https://portalfacilarquivos.blob.core.windows.net/uploads/VICOSA/imgOrig/%7B60DC018A-0135-EE5B-476B-0E350B5C15BB%7D.jpg"
-                alt="logo da prefeitura" />
-            <H1>PREFEITURA DE VIÇOSA -MG</H1>
-        </div>
-    </footer>
-</body>
-
-</html>
+@push('foot')
+@endpush

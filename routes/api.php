@@ -14,3 +14,4 @@ Route::post('/OuvidoriaAtendimento', [OuvidoriaController::class, 'atendimento']
 Route::post('/OuvidoriaLogin', [OuvidoriaController::class, 'login']);
 Route::post('/OuvidoriaRecuperarLogin', [OuvidoriaController::class, 'recuperarLogin']);
 Route::post('/OuvidoriaRecuperarSenha', [OuvidoriaController::class, 'recuperarSenha']);
+Route::post('/OuvidoriaProtocolo', [OuvidoriaController::class, 'protocolo']);

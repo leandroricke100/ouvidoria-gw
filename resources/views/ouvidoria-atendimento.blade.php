@@ -1,44 +1,43 @@
 @inject('Helper', '\App\Helper\Helper')
 
+@extends('layout', [
+    'titulo' => 'Ouvidoria - Atendimento' . $Helper->leftPad($atendimento->numero) . '/' . $atendimento->ano,
+    'header' => false,
+    'footer' => false,
+])
 
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ouvidoria - Atendimento {{ $Helper->leftPad($atendimento->numero) }}/{{ $atendimento->ano }}
-    </title>
-
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
+@push('head')
     <script src="{{ asset('js/ouvidoria-atendimento.js') }}"></script>
-
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-
     <link href="{{ asset('css/ouvidoria-atendimento.css') }}?v={{ time() }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
-</head>
+@endpush
 
-<body>
+@section('conteudo')
     <div id="atendimento" class="atendimento">
         <div class="logout-top">
-            <div class="voltar-top">
-                <a class="button-voltar" href="javascript:history.back()">Voltar</a>
-            </div>
 
-            <div class="logado">
-                <span><strong>Logado:
-                    </strong>
 
-                    @if ($user->cpf)
-                        {{ substr($user->cpf, 0, 3) . '******' . substr($user->cpf, -2) }}
-                    @else
-                        {{ substr($user->email, 0, 3) . '***@***' . substr($user->email, -2) }}
-                    @endif
-                </span>
-                <button class="button-sair" onclick="sair()">Sair</button>
-            </div>
+            @if (isset($user))
+                <div class="voltar-top">
+                    <a class="button-voltar" href="javascript:history.back()">Voltar</a>
+                </div>
+                <div class="logado">
+                    <span><strong>Usuário:
+                        </strong>
+
+                        @if ($user->cpf)
+                            {{ substr($user->cpf, 0, 3) . '******' . substr($user->cpf, -2) }}
+                        @else
+                            {{ substr($user->email, 0, 3) . '***@***' . substr($user->email, -2) }}
+                        @endif
+                    </span>
+                    <button class="button-sair" onclick="sair()">Sair</button>
+                </div>
+            @else
+                <div class="voltar-top">
+                    <a class="button-voltar" href="/">Voltar</a>
+                </div>
+            @endif
+
         </div>
         <div class="ticket">
             <div class="number-atendimento">
@@ -114,16 +113,19 @@
         @endforeach
 
 
+        @if (isset($user))
+            <form class="new-text form" id="cad-resposta-user">
+                <label for="atendimentoUsuario"><strong>Interagir em Atendimento</strong></label>
+                <textarea id="atendimentoUsuario" name="atendimentoUsuario" class="atendimentoUsuario" rows="8"></textarea>
+                <input type="file" id="arquivo" name="arquivo">
+                <input type="hidden" name="autor" id="autor" value="usuario">
+                <input type="hidden" name="id_atendimento" id="id_atendimento" value="{{ $atendimento->numero }}">
+                <button type="submit">ENVIAR</button>
+            </form>
+        @endif
 
-        <form class="new-text form" id="cad-resposta-user">
-            <label for="atendimentoUsuario"><strong>Interagir em Atendimento</strong></label>
-            <textarea id="atendimentoUsuario" name="atendimentoUsuario" class="atendimentoUsuario" rows="8"></textarea>
-            <input type="file" id="arquivo" name="arquivo">
-            <input type="hidden" name="autor" id="autor" value="usuario">
-            <input type="hidden" name="id_atendimento" id="id_atendimento" value="{{ $atendimento->numero }}">
-            <button type="submit">ENVIAR</button>
-        </form>
     </div>
-</body>
+@endsection
 
-</html>
+@push('foot')
+@endpush

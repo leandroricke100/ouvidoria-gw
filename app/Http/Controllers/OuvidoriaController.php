@@ -358,4 +358,26 @@ class OuvidoriaController extends Controller
             ]);
         }
     }
+
+    public function protocolo(Request $request)
+    {
+        $dados = $request->all();
+
+        $protocolo = OuvidoriaAtendimento::where('codigo', $dados['numberProtocolo'])->where('created_at', '>=', $dados['data'] . ' 00:00:00')->where('created_at', '<=', $dados['data'] . ' 23:59:59')->get()->first();
+
+        if (!$protocolo) return response()->json(['status' => false, 'msg' => 'Não foi encontrado nenhum protocolo com esses dados.']);
+
+
+        $dataFormat = str_replace('-', '', $dados['data']);
+        $numFormat = str_replace('.', '', $dados['numberProtocolo']);
+
+        $link = route('usuario-protocolo', ['data' => $dataFormat, 'numero' => $numFormat]);
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Protocolo encontrado',
+            'dados' => $protocolo,
+            'link' => $link
+        ]);
+    }
 }

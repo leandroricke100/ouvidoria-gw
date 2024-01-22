@@ -10,11 +10,10 @@
     <title>ADMIN-Atendimento {{ $Helper->leftPad($atendimento->numero) }}/{{ $atendimento->ano }}
     </title>
 
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/admin-atendimento.js') }}"></script>
+    @include('tools')
 
+    <script src="{{ asset('js/admin-atendimento.js') }}"></script>
     <link href="{{ asset('css/admin-atendimento.css') }}?v={{ time() }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('fonts/fontawesome/fontawesome-pro.css') }}" />
 </head>
 
 <body>
